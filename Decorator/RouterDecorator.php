@@ -24,7 +24,7 @@ class RouterDecorator
     public function generate($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH)
     {
         if (isset($parameters['id'])){
-            $parameters['id'] .= '_HASHED__zzz';
+            $parameters['id'] .= '_HASHED__zzz-zzz';
         }
         $route = $this->getRouter()->getRouteCollection()->get($name);
 
