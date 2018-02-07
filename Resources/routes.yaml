@@ -1,0 +1,3 @@
+pgs_hash_id_demo:
+    path: /hash-id/demo/{id}
+    controller: Pgs\HashIdBundle\Controller\DemoController::demo

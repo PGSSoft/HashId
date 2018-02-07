@@ -1,0 +1,9 @@
+services:
+    Pgs\HashIdBundle\:
+        exclude: '../src/Pgs/HashIdBundle/{Entity,Migrations,Tests}/*'
+
+    pgs_hash_id.decorator.router_decorator:
+        class: Pgs\HashIdBundle\Decorator\RouterDecorator
+        public: false
+        decorates: router
+        arguments: ["@router.default"]
