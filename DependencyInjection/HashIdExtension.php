@@ -1,10 +1,17 @@
 <?php
 
 
-namespace HashIdBundle\DependencyInjection;
+namespace Pgs\HashIdBundle\DependencyInjection;
 
 
-class HashIdExtension
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+
+class HashIdExtension extends Extension
 {
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $c = $configs;echo "dddd";
+    }
 
 }
