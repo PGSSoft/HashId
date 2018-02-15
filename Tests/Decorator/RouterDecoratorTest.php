@@ -38,7 +38,7 @@ class RouterDecoratorTest extends WebTestCase
         $notDecoratedRoute = $this->router->generate(...$routeArgs);
         $decoratedRouter = new RouterDecorator($this->router);
         $decoratedRoute = $decoratedRouter->generate(...$routeArgs);
-        var_dump($notDecoratedRoute, $decoratedRoute);
+//        var_dump($notDecoratedRoute, $decoratedRoute);
         $this->assertNotEquals($decoratedRoute, $notDecoratedRoute);
     }
 

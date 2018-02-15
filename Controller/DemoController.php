@@ -17,7 +17,7 @@ class DemoController extends Controller
     public function demo($id)
     {
         $url = $this->generateUrl('pgs_hash_id_demo', ['id' => $id]);
-        
+
         return new Response(
             '<html><body>Provided id: '.$id.'<br />url: '.$url.'</body></html>'
         );
