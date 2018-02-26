@@ -23,8 +23,8 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode(self::NODE_SALT)->defaultNull()->end()
-                ->scalarNode(self::NODE_MIN_HASH_LENGTH)->defaultValue(0)->end()
-                ->scalarNode(self::NODE_ALPHABET)->defaultValue('')->end()
+                ->scalarNode(self::NODE_MIN_HASH_LENGTH)->defaultValue(10)->end()
+                ->scalarNode(self::NODE_ALPHABET)->defaultValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')->end()
             ->end();
 
         return $treeBuilder;

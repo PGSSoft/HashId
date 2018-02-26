@@ -40,8 +40,8 @@ class ConfigurationTest extends TestCase
                 [],
                 [
                     Configuration::NODE_SALT => null,
-                    Configuration::NODE_MIN_HASH_LENGTH => 0,
-                    Configuration::NODE_ALPHABET => '',
+                    Configuration::NODE_MIN_HASH_LENGTH => 10,
+                    Configuration::NODE_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                 ]
             ],
             [
@@ -50,8 +50,8 @@ class ConfigurationTest extends TestCase
                 ],
                 [
                     Configuration::NODE_SALT => 'test_salt',
-                    Configuration::NODE_MIN_HASH_LENGTH => 0,
-                    Configuration::NODE_ALPHABET => '',
+                    Configuration::NODE_MIN_HASH_LENGTH => 10,
+                    Configuration::NODE_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                 ]
             ],
             [
