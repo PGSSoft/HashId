@@ -12,7 +12,8 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
-class RouterDecoratorTest extends WebTestCase
+
+class RouterDecoratorT_est extends WebTestCase
 {
     /**
      * @var RouterInterface

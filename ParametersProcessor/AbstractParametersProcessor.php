@@ -15,7 +15,7 @@ abstract class AbstractParametersProcessor implements ParametersProcessorInterfa
      */
     protected $hashIds;
 
-    public function __construct(HashidsInterface $hashIds, array $parametersToProcess)
+    public function __construct(HashidsInterface $hashIds, array $parametersToProcess = [])
     {
         $this->hashIds = $hashIds;
         $this->parametersToProcess = $parametersToProcess;

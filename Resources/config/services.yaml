@@ -1,10 +1,55 @@
+parameters:
+    pgs_hash_id.hashids.class: Hashids\Hashids
+    pgs_hash_id.decorator.router.class: Pgs\HashIdBundle\Decorator\RouterDecorator
+    pgs_hash_id.reflection_provider.class: Pgs\HashIdBundle\Reflection\ReflectionProvider
+    pgs_hash_id.annotation_provider.controller.class: Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider
+    pgs_hash_id.parameters_processor.encode.class: Pgs\HashIdBundle\ParametersProcessor\Encode
+    pgs_hash_id.parameters_processor.decode.class: Pgs\HashIdBundle\ParametersProcessor\Decode
+    pgs_hash_id.parameters_processor.no_op.class: Pgs\HashIdBundle\ParametersProcessor\NoOp
+
 services:
     pgs_hash_id.hashids:
-        class: Hashids\Hashids
+        class: '%pgs_hash_id.hashids.class%'
         arguments:
-            -
-    pgs_hash_id.decorator.router_decorator:
-        class: Pgs\HashIdBundle\Decorator\RouterDecorator
+            - '%pgs_hash_id.salt%'
+            - '%pgs_hash_id.min_hash_length%'
+            - '%pgs_hash_id.alphabet%'
+
+    pgs_hash_id.decorator.router:
+        class: '%pgs_hash_id.decorator.router.class%'
         public: false
         decorates: router
-        arguments: ["@router.default"]
+        arguments:
+          - "@router.default"
+          - "@pgs_hash_id.parameters_processor.factory"
+
+    pgs_hash_id.reflection_provider:
+        class: '%pgs_hash_id.reflection_provider.class%'
+
+    pgs_hash_id.annotation.reader:
+        class: Doctrine\Common\Annotations\AnnotationReader
+
+    pgs_hash_id.annotation_provider.controller:
+        class: '%pgs_hash_id.annotation_provider.controller.class%'
+        arguments:
+          - '@pgs_hash_id.annotation.reader'
+          - '@pgs_hash_id.reflection_provider'
+
+    pgs_hash_id.parameters_processor.encode:
+        class: '%pgs_hash_id.parameters_processor.encode.class%'
+        arguments: ['@pgs_hash_id.hashids']
+
+    pgs_hash_id.parameters_processor.decode:
+        class: '%pgs_hash_id.parameters_processor.decode.class%'
+        arguments: ['@pgs_hash_id.hashids']
+
+    pgs_hash_id.parameters_processor.no_op:
+        class: '%pgs_hash_id.parameters_processor.no_op.class%'
+
+    pgs_hash_id.parameters_processor.factory:
+        class: Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorFactory
+        arguments:
+            - '@pgs_hash_id.parameters_processor.encode'
+            - '@pgs_hash_id.parameters_processor.decode'
+            - '@pgs_hash_id.parameters_processor.no_op'
+            - '@pgs_hash_id.annotation_provider.controller'

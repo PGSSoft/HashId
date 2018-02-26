@@ -31,7 +31,7 @@ class DecodeTest extends TestCase
 
     protected function getHashidMock()
     {
-        $mock = $this->getMockBuilder(HashidsInterface::class)->setMethods(['decode'])->getMock();
+        $mock = $this->getMockBuilder(HashidsInterface::class)->setMethods(['decode'])->getMockForAbstractClass();
         $mock
             ->method('decode')
             ->withAnyParameters()

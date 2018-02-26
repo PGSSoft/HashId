@@ -22,7 +22,7 @@ class EncodeTest extends TestCase
 
     protected function getHashidMock()
     {
-        $mock = $this->getMockBuilder(HashidsInterface::class)->setMethods(['encode'])->getMock();
+        $mock = $this->getMockBuilder(HashidsInterface::class)->setMethods(['encode'])->getMockForAbstractClass();
         $mock
             ->method('encode')
             ->withAnyParameters()

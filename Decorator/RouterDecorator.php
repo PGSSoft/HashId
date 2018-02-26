@@ -4,6 +4,7 @@
 namespace Pgs\HashIdBundle\Decorator;
 
 
+use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -12,9 +13,12 @@ class RouterDecorator implements RouterInterface
 {
     use DecoratorTrait;
 
-    public function __construct(RouterInterface $router)
+    protected $parametersProcessorFactory;
+
+    public function __construct(RouterInterface $router, ParametersProcessorFactory $parametersProcessorFactory)
     {
         $this->object = $router;
+        $this->parametersProcessorFactory = $parametersProcessorFactory;
     }
 
     public function getRouter(): RouterInterface
@@ -24,14 +28,11 @@ class RouterDecorator implements RouterInterface
 
     public function generate($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH)
     {
-        if (isset($parameters['id'])) {
-            $parameters['id'] .= '_HASHED__zzz-zzz';
-        }
         $route = $this->getRouter()->getRouteCollection()->get($name);
-        $controller = $route->getDefault('_controller');
+        $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route);
 
-        // @var $allOptions will have all the options for current route.
-        $allOptions = $route->getOptions();
+        $parameters = $parametersProcessor->process($parameters);
+
         return $this->getRouter()->generate($name, $parameters, $referenceType);
     }
 
