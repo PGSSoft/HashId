@@ -49,6 +49,11 @@ class NoOpTest extends TestCase
         $this->assertSame([], $parametersProcessor->getParametersToProcess());
     }
 
+    public function testGetNeedToProcess()
+    {
+        $this->assertEquals(false, $this->parametersProcessor->needToProcess());
+    }
+
     protected function getHashidMock()
     {
         return $this->getMockBuilder(HashidsInterface::class)->getMock();

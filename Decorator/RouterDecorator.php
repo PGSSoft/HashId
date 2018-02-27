@@ -4,7 +4,7 @@
 namespace Pgs\HashIdBundle\Decorator;
 
 
-use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorFactory;
+use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -15,7 +15,7 @@ class RouterDecorator implements RouterInterface
 
     protected $parametersProcessorFactory;
 
-    public function __construct(RouterInterface $router, ParametersProcessorFactory $parametersProcessorFactory)
+    public function __construct(RouterInterface $router, EncodeParametersProcessorFactory $parametersProcessorFactory)
     {
         $this->object = $router;
         $this->parametersProcessorFactory = $parametersProcessorFactory;
@@ -30,8 +30,9 @@ class RouterDecorator implements RouterInterface
     {
         $route = $this->getRouter()->getRouteCollection()->get($name);
         $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route);
-
-        $parameters = $parametersProcessor->process($parameters);
+        if ($parametersProcessor->needToProcess()){
+            $parameters = $parametersProcessor->process($parameters);
+        }
 
         return $this->getRouter()->generate($name, $parameters, $referenceType);
     }

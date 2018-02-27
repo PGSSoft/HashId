@@ -6,6 +6,9 @@ parameters:
     pgs_hash_id.parameters_processor.encode.class: Pgs\HashIdBundle\ParametersProcessor\Encode
     pgs_hash_id.parameters_processor.decode.class: Pgs\HashIdBundle\ParametersProcessor\Decode
     pgs_hash_id.parameters_processor.no_op.class: Pgs\HashIdBundle\ParametersProcessor\NoOp
+    pgs_hash_id.parameters_processor.factory.abstract.class: Pgs\HashIdBundle\ParametersProcessor\Factory\AbstractParametersProcessorFactory
+    pgs_hash_id.parameters_processor.factory.encode.class: Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory
+    pgs_hash_id.parameters_processor.factory.decode.class: Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory
 
 services:
     pgs_hash_id.hashids:
@@ -21,7 +24,7 @@ services:
         decorates: router
         arguments:
           - "@router.default"
-          - "@pgs_hash_id.parameters_processor.factory"
+          - "@pgs_hash_id.parameters_processor.factory.encode"
 
     pgs_hash_id.reflection_provider:
         class: '%pgs_hash_id.reflection_provider.class%'
@@ -46,10 +49,22 @@ services:
     pgs_hash_id.parameters_processor.no_op:
         class: '%pgs_hash_id.parameters_processor.no_op.class%'
 
-    pgs_hash_id.parameters_processor.factory:
-        class: Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorFactory
+    pgs_hash_id.parameters_processor.factory.abstract:
+        class: '%pgs_hash_id.parameters_processor.factory.abstract.class%'
+        abstract: true
+        arguments:
+            - '@pgs_hash_id.annotation_provider.controller'
+            - '@pgs_hash_id.parameters_processor.no_op'
+
+    pgs_hash_id.parameters_processor.factory.encode:
+        class: '%pgs_hash_id.parameters_processor.factory.encode.class%'
+        parent: pgs_hash_id.parameters_processor.factory.abstract
         arguments:
             - '@pgs_hash_id.parameters_processor.encode'
+
+    pgs_hash_id.parameters_processor.factory.decode:
+        class: '%pgs_hash_id.parameters_processor.factory.decode.class%'
+        parent: pgs_hash_id.parameters_processor.factory.abstract
+        arguments:
             - '@pgs_hash_id.parameters_processor.decode'
-            - '@pgs_hash_id.parameters_processor.no_op'
-            - '@pgs_hash_id.annotation_provider.controller'
+

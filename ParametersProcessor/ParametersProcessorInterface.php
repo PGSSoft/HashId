@@ -11,4 +11,6 @@ interface ParametersProcessorInterface
     public function setParametersToProcess(array $parametersToProcess): ParametersProcessorInterface;
 
     public function getParametersToProcess(): array;
+
+    public function needToProcess(): bool ;
 }

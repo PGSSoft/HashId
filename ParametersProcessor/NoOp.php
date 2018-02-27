@@ -23,4 +23,9 @@ class NoOp implements ParametersProcessorInterface
         $this->parametersToProcess = [];
         return $this;
     }
+
+    public function needToProcess(): bool
+    {
+        return false;
+    }
 }

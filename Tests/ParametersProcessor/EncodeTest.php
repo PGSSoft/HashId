@@ -18,6 +18,7 @@ class EncodeTest extends TestCase
         $encodeParametersProcessor = new Encode($this->getHashidMock(), $parametersToEncode);
         $processedParameters = $encodeParametersProcessor->process($routeParameters);
         $this->assertSame($expected, $processedParameters);
+        $this->assertEquals(count($parametersToEncode) > 0, $encodeParametersProcessor->needToProcess());
     }
 
     protected function getHashidMock()

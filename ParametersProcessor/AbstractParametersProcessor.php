@@ -48,5 +48,10 @@ abstract class AbstractParametersProcessor implements ParametersProcessorInterfa
         return $parameters;
     }
 
+    public function needToProcess(): bool
+    {
+        return count($this->getParametersToProcess()) > 0;
+    }
+
     abstract protected function processValue($value);
 }
