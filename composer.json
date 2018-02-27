@@ -25,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Pgs\\HashIdBundle\\Tests\\": "tests/"
+            "Pgs\\HashIdBundle\\Tests\\": "Tests/"
         }
     },
     "minimum-stability": "stable",
