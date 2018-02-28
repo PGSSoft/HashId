@@ -8,6 +8,7 @@ use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactor
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
+use PHPUnit\Framework\TestCase;
 
 class RouterDecorator implements RouterInterface
 {
@@ -37,21 +38,33 @@ class RouterDecorator implements RouterInterface
         return $this->getRouter()->generate($name, $parameters, $referenceType);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setContext(RequestContext $context)
     {
         $this->getRouter()->setContext($context);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getContext()
     {
         return $this->getRouter()->getContext();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getRouteCollection()
     {
         return $this->getRouter()->getRouteCollection();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function match($pathinfo)
     {
         return $this->getRouter()->match($pathinfo);

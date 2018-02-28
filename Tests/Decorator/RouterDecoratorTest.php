@@ -4,14 +4,7 @@
 namespace Pgs\HashIdBundle\Tests\Decorator;
 
 
-use Pgs\HashIdBundle\Decorator\RouterDecorator;
-use Pgs\HashIdBundle\ParametersProcessor\Encode;
-use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
-use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
 
@@ -22,60 +15,17 @@ class RouterDecoratorTest extends WebTestCase
      */
     private $router = null;
 
-    private $loader = null;
-
     protected function setUp()
     {
         $this->router = static::createClient()->getContainer()->get('router');
-        $this->loader = $this->getMockBuilder(LoaderInterface::class)->getMock();
-
-//        $this->router = new Router($this->loader, 'routing.yml');
-//        $this->services['router'] = $instance = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'kernel:loadRoutes', array('cache_dir' => $this->targetDirs[0], 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'srcDevDebugProjectContainerUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'srcDevDebugProjectContainerUrlMatcher', 'strict_requirements' => true, 'resource_type' => 'service'), ($this->privates['router.request_context'] ?? $this->getRouter_RequestContextService()));
-//        $this->router = $instance = new Router($this->loader, 'kernel:loadRoutes', array('debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'srcDevDebugProjectContainerUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'srcDevDebugProjectContainerUrlMatcher', 'strict_requirements' => true, 'resource_type' => 'service'));
-//        $this->router = $this->getRouterMock();
     }
 
     public function testIsIdDifferent()
     {
-        $routeArgs = ['pgs_hash_id_demo', ['max' => 100, 'id' => 10]];
-        $notDecoratedRoute = $this->router->generate(...$routeArgs);
-        var_dump($notDecoratedRoute);
-//        $decoratedRouter = new RouterDecorator($this->router, $this->getEncodeParametersProcessorFactoryMock());
-//        $decoratedRoute = $decoratedRouter->generate(...$routeArgs);
-//        var_dump($notDecoratedRoute, $decoratedRoute);
-//        $this->assertNotEquals($decoratedRoute, $notDecoratedRoute);
-    }
-
-//    protected function getRouter(){
-//        return self::getKernel()->getContainer()->get('router');
-//    }
-
-    protected function getEncodeParametersProcessorFactoryMock()
-    {
-        $mock = $this->getMockBuilder(EncodeParametersProcessorFactory::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['createRouteEncodeParametersProcessor'])
-            ->getMock();
-
-        $mock->method('createRouteEncodeParametersProcessor')->willReturn($this->getEncodeParametersProcessorMock());
-
-        return $mock;
-    }
-
-    protected function getEncodeParametersProcessorMock()
-    {
-        $mock = $this
-            ->getMockBuilder(Encode::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['processValue'])
-            ->getMock();
-
-        $mock
-            ->method('processValue')
-            ->willReturnMap([
-               [10, '10_encoded']
-            ]);
-
-        return $mock;
+        $id = 10;
+        $routeArgs = ['pgs_hash_id_demo', ['id' => $id]];
+        $generatedPath = $this->router->generate(...$routeArgs);
+        $this->assertNotEquals(sprintf('/hash-id/demo/%d', $id), $generatedPath);
+        $this->assertTrue(preg_match('/\/hash-id\/demo\/\w+/', $generatedPath) === 1);
     }
 }
