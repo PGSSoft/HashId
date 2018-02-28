@@ -5,6 +5,8 @@ namespace Pgs\HashIdBundle\Tests\Decorator;
 
 
 use Pgs\HashIdBundle\Decorator\RouterDecorator;
+use Pgs\HashIdBundle\ParametersProcessor\Encode;
+use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -13,7 +15,7 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
 
-class RouterDecoratorT_est extends WebTestCase
+class RouterDecoratorTest extends WebTestCase
 {
     /**
      * @var RouterInterface
@@ -35,33 +37,44 @@ class RouterDecoratorT_est extends WebTestCase
 
     public function testIsIdDifferent()
     {
-        $routeArgs = ['pgs_hash_id_demo', ['max'=> 100, 'id' => 10]];
+        $routeArgs = ['pgs_hash_id_demo', ['max' => 100, 'id' => 10]];
         $notDecoratedRoute = $this->router->generate(...$routeArgs);
-        $decoratedRouter = new RouterDecorator($this->router);
-        $decoratedRoute = $decoratedRouter->generate(...$routeArgs);
+        var_dump($notDecoratedRoute);
+//        $decoratedRouter = new RouterDecorator($this->router, $this->getEncodeParametersProcessorFactoryMock());
+//        $decoratedRoute = $decoratedRouter->generate(...$routeArgs);
 //        var_dump($notDecoratedRoute, $decoratedRoute);
-        $this->assertNotEquals($decoratedRoute, $notDecoratedRoute);
+//        $this->assertNotEquals($decoratedRoute, $notDecoratedRoute);
     }
 
 //    protected function getRouter(){
 //        return self::getKernel()->getContainer()->get('router');
 //    }
 
-    protected function getRouterMock()
+    protected function getEncodeParametersProcessorFactoryMock()
     {
-        $mock = $this->getMockBuilder('\Symfony\Bundle\FrameworkBundle\Routing\Router')
+        $mock = $this->getMockBuilder(EncodeParametersProcessorFactory::class)
             ->disableOriginalConstructor()
-            ->setMethods(['generate', 'supports', 'exists'])
-            ->getMockForAbstractClass();
+            ->setMethods(['createRouteEncodeParametersProcessor'])
+            ->getMock();
 
-        $args = ['crmpiccobundle_portal_billing', [
-            'subdomain' => "crmpicco",
-        ], true];
+        $mock->method('createRouteEncodeParametersProcessor')->willReturn($this->getEncodeParametersProcessorMock());
 
-        $mock->expects($this->any())
-            ->method('generate')
-            ->with($args)
-            ->will($this->returnValue('https://www.crmpicco.co.uk/en/admin/billing'));
+        return $mock;
+    }
+
+    protected function getEncodeParametersProcessorMock()
+    {
+        $mock = $this
+            ->getMockBuilder(Encode::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['processValue'])
+            ->getMock();
+
+        $mock
+            ->method('processValue')
+            ->willReturnMap([
+               [10, '10_encoded']
+            ]);
 
         return $mock;
     }

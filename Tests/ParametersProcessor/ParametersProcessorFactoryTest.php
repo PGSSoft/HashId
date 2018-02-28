@@ -86,6 +86,7 @@ class ParametersProcessorFactoryTest extends TestCase
     protected function getTestRouteMock()
     {
         $mock = $this->getMockBuilder(Route::class)
+            ->disableOriginalConstructor()
             ->setMethods(['getDefault'])
             ->getMock();
         $mock->method('getDefault')->with('_controller')->willReturn('TestController::testMethod');
