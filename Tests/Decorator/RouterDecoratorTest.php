@@ -13,19 +13,19 @@ class RouterDecoratorTest extends WebTestCase
     /**
      * @var RouterInterface
      */
-    private $router = null;
+    private $router;
 
     protected function setUp()
     {
         $this->router = static::createClient()->getContainer()->get('router');
     }
 
-    public function testIsIdDifferent()
+    public function testIsIdDifferent(): void
     {
         $id = 10;
-        $routeArgs = ['pgs_hash_id_demo', ['id' => $id]];
+        $routeArgs = ['pgs_hash_id_demo_decode', ['id' => $id]];
         $generatedPath = $this->router->generate(...$routeArgs);
-        $this->assertNotEquals(sprintf('/hash-id/demo/%d', $id), $generatedPath);
-        $this->assertTrue(preg_match('/\/hash-id\/demo\/\w+/', $generatedPath) === 1);
+        $this->assertNotEquals(sprintf('/hash-id/demo/decode/%d', $id), $generatedPath);
+        $this->assertSame(1, preg_match('/\/hash-id\/demo\/decode\/\w+/', $generatedPath));
     }
 }

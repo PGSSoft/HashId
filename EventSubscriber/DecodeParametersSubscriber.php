@@ -18,7 +18,7 @@ class DecodeParametersSubscriber implements EventSubscriberInterface
         $this->parametersProcessorFactory = $parametersProcessorFactory;
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(FilterControllerEvent $event): void
     {
         $controller = $event->getController();
         $parametersProcessor = $this->parametersProcessorFactory->createControllerDecodeParametersProcessor(...$controller);
@@ -29,7 +29,7 @@ class DecodeParametersSubscriber implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::CONTROLLER => 'onKernelController'

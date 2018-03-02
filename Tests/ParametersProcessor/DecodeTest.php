@@ -35,7 +35,7 @@ class DecodeTest extends TestCase
         $mock
             ->method('decode')
             ->withAnyParameters()
-            ->willReturn(10);
+            ->willReturn([10]);
 
         return $mock;
     }
