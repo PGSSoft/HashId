@@ -4,27 +4,25 @@
 namespace Pgs\HashIdBundle\Reflection;
 
 
-use Pgs\HashIdBundle\Exception\MissingClassException;
+use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 
 class ReflectionProvider
 {
-    public function getMethodReflectionFromClassString(string $class, string $method)
+    public function getMethodReflectionFromClassString(string $class, string $method): ?\ReflectionMethod
     {
         try {
-            $reflectionMethod = new \ReflectionMethod($class, $method);
-            return $reflectionMethod;
+            return new \ReflectionMethod($class, $method);
         } catch (\ReflectionException $e) {
-            throw new MissingClassException($e->getMessage(), $e->getCode(), $e);
+            throw new MissingClassOrMethodException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
-    public function getMethodReflectionFromObject($object, string $method)
+    public function getMethodReflectionFromObject($object, string $method): ?\ReflectionMethod
     {
         try {
-            $reflectionMethod = new \ReflectionMethod($object, $method);
-            return $reflectionMethod;
+            return new \ReflectionMethod($object, $method);
         } catch (\ReflectionException $e) {
-            throw new MissingClassException($e->getMessage(), $e->getCode(), $e);
+            throw new MissingClassOrMethodException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }
