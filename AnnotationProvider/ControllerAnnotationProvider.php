@@ -27,7 +27,7 @@ class ControllerAnnotationProvider implements ControllerAnnotationProviderInterf
     public function getFromString(string $controller, string $annotationClassName)
     {
         $explodedControllerString = explode('::', $controller);
-        if (count($explodedControllerString) !== 2) {
+        if (\count($explodedControllerString) !== 2) {
             throw new InvalidControllerException(sprintf('The "%s" controller is not a valid "class::method" string.', $controller));
         }
         $reflection = $this->reflectionProvider->getMethodReflectionFromClassString(...$explodedControllerString);

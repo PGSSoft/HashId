@@ -7,6 +7,7 @@ namespace Pgs\HashIdBundle\Decorator;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 class RouterDecorator implements RouterInterface
@@ -26,15 +27,22 @@ class RouterDecorator implements RouterInterface
         return $this->object;
     }
 
-    public function generate($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH)
+    public function generate($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH): string
     {
         $route = $this->getRouter()->getRouteCollection()->get($name);
-        $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route);
-        if ($parametersProcessor->needToProcess()){
-            $parameters = $parametersProcessor->process($parameters);
-        }
+        $this->processParameters($route, $parameters);
 
         return $this->getRouter()->generate($name, $parameters, $referenceType);
+    }
+
+    private function processParameters(?Route $route, array &$parameters): void
+    {
+        if ($route !== null) {
+            $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route);
+            if ($parametersProcessor->needToProcess()) {
+                $parameters = $parametersProcessor->process($parameters);
+            }
+        }
     }
 
     /**

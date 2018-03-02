@@ -21,7 +21,7 @@ class DecodeParametersSubscriber implements EventSubscriberInterface
     public function onKernelController(FilterControllerEvent $event): void
     {
         $controller = $event->getController();
-        $parametersProcessor = $this->parametersProcessorFactory->createControllerDecodeParametersProcessor(...$controller);
+        $parametersProcessor = $this->getParametersProcessorFactory()->createControllerDecodeParametersProcessor(...$controller);
         if ($parametersProcessor->needToProcess()) {
             $requestParams = $event->getRequest()->attributes->all();
             $processedParams = $parametersProcessor->process($requestParams);

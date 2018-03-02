@@ -6,6 +6,7 @@ namespace Pgs\HashIdBundle\Tests\AnnotationProvider;
 use Doctrine\Common\Annotations\Reader;
 use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
 use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProviderInterface;
+use Pgs\HashIdBundle\Controller\DemoController;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
 use PHPUnit\Framework\TestCase;
@@ -22,21 +23,21 @@ class ControllerAnnotationProviderTest extends TestCase
         $this->controllerAnnotationProvider = new ControllerAnnotationProvider($this->getReaderMock(), $this->getReflectionProviderMock());
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->assertInstanceOf(ControllerAnnotationProvider::class, $this->controllerAnnotationProvider);
     }
 
-    public function testInvalidControllerString()
+    public function testInvalidControllerString(): void
     {
         $this->expectException(InvalidControllerException::class);
         $this->controllerAnnotationProvider->getFromString('dummy_controler_string', 'annotationClassName');
     }
 
-    public function testReturnObject()
+    public function testReturnObject(): void
     {
-        $result = $this->controllerAnnotationProvider->getFromString('\Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
-        $this->assertEquals(true, is_object($result));
+        $result = $this->controllerAnnotationProvider->getFromString('Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
+        $this->assertEquals(true, \is_object($result));
 
         $controller = $this->getObjectMock();
     }
@@ -64,7 +65,7 @@ class ControllerAnnotationProviderTest extends TestCase
             ->getMock();
         $reflectionProviderMock
             ->method('getMethodReflectionFromClassString')
-            ->with('\Pgs\HashIdBundle\Controller\DemoController', 'demo')->willReturn($this->createMock(\ReflectionMethod::class));
+            ->with(DemoController::class, 'demo')->willReturn($this->createMock(\ReflectionMethod::class));
 
         $reflectionProviderMock
             ->method('getMethodReflectionFromObject')
