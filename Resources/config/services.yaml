@@ -30,13 +30,10 @@ services:
     pgs_hash_id.reflection_provider:
         class: '%pgs_hash_id.reflection_provider.class%'
 
-    pgs_hash_id.annotation.reader:
-        class: Doctrine\Common\Annotations\AnnotationReader
-
     pgs_hash_id.annotation_provider.controller:
         class: '%pgs_hash_id.annotation_provider.controller.class%'
         arguments:
-          - '@pgs_hash_id.annotation.reader'
+          - '@annotation_reader'
           - '@pgs_hash_id.reflection_provider'
 
     pgs_hash_id.parameters_processor.encode:
