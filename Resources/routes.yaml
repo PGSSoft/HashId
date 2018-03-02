@@ -1,3 +1,7 @@
-pgs_hash_id_demo:
-    path: /hash-id/demo/{id}
-    controller: Pgs\HashIdBundle\Controller\DemoController::demo
+pgs_hash_id_demo_encode:
+    path: /hash-id/demo/encode/{id}
+    controller: Pgs\HashIdBundle\Controller\DemoController::encode
+
+pgs_hash_id_demo_decode:
+    path: /hash-id/demo/decode/{id}
+    controller: Pgs\HashIdBundle\Controller\DemoController::decode
