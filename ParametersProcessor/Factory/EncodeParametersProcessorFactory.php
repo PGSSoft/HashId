@@ -31,7 +31,7 @@ class EncodeParametersProcessorFactory extends AbstractParametersProcessorFactor
     {
         $controller = $route->getDefault('_controller');
         /** @var Hash $annotation */
-        $annotation = $this->getAnnotationProvider()->get($controller, Hash::class);
+        $annotation = $this->getAnnotationProvider()->getFromString($controller, Hash::class);
         return $annotation !== null ? $this->getEncodeParametersProcessor()->setParametersToProcess($annotation->getParameters()) : $this->getNoOpParametersProcessor();
     }
 

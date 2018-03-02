@@ -30,13 +30,15 @@ class ControllerAnnotationProviderTest extends TestCase
     public function testInvalidControllerString()
     {
         $this->expectException(InvalidControllerException::class);
-        $this->controllerAnnotationProvider->get('dummy_controler_string', 'annotationClassName');
+        $this->controllerAnnotationProvider->getFromString('dummy_controler_string', 'annotationClassName');
     }
 
     public function testReturnObject()
     {
-        $result = $this->controllerAnnotationProvider->get('\Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
+        $result = $this->controllerAnnotationProvider->getFromString('\Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
         $this->assertEquals(true, is_object($result));
+
+        $controller = $this->getObjectMock();
     }
 
 
@@ -55,12 +57,25 @@ class ControllerAnnotationProviderTest extends TestCase
     protected function getReflectionProviderMock()
     {
         $reflectionProviderMock = $this->getMockBuilder(ReflectionProvider::class)
-            ->setMethods(['getMethodReflection'])
+            ->setMethods([
+                'getMethodReflectionFromClassString',
+                'getMethodReflectionFromObject'
+            ])
             ->getMock();
         $reflectionProviderMock
-            ->method('getMethodReflection')
-            ->with('\Pgs\HashIdBundle\Controller\DemoController','demo')->willReturn($this->createMock(\ReflectionMethod::class));
+            ->method('getMethodReflectionFromClassString')
+            ->with('\Pgs\HashIdBundle\Controller\DemoController', 'demo')->willReturn($this->createMock(\ReflectionMethod::class));
+
+        $reflectionProviderMock
+            ->method('getMethodReflectionFromObject')
+            ->with(new \stdClass(), 'demo')->willReturn($this->createMock(\ReflectionMethod::class));
 
         return $reflectionProviderMock;
+    }
+
+    protected function getObjectMock()
+    {
+        $mock = $this->getMockBuilder('DemoController')->setMethods(['demo'])->getMock();
+        return $mock;
     }
 }

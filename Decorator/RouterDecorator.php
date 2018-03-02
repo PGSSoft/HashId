@@ -8,7 +8,6 @@ use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactor
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
-use PHPUnit\Framework\TestCase;
 
 class RouterDecorator implements RouterInterface
 {

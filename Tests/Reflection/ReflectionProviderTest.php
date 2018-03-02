@@ -14,7 +14,7 @@ class ReflectionProviderTest extends TestCase
     public function testGetProperReflection()
     {
         $reflectionProvider = new ReflectionProvider();
-        $methodReflection = $reflectionProvider->getMethodReflection(ExistingClass::class, 'existingMethod');
+        $methodReflection = $reflectionProvider->getMethodReflectionFromClassString(ExistingClass::class, 'existingMethod');
         $this->assertInstanceOf(\ReflectionMethod::class, $methodReflection);
     }
 
@@ -26,6 +26,6 @@ class ReflectionProviderTest extends TestCase
     public function testGetReflectionForNonExistingClass(){
         $this->expectException(MissingClassException::class);
         $reflectionProvider = new ReflectionProvider();
-        $methodReflection = $reflectionProvider->getMethodReflection('NonExistingClass', 'nonExistingMethod');
+        $methodReflection = $reflectionProvider->getMethodReflectionFromClassString('NonExistingClass', 'nonExistingMethod');
     }
 }

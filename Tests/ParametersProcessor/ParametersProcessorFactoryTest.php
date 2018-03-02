@@ -48,7 +48,7 @@ class ParametersProcessorFactoryTest extends TestCase
     protected function getExistingControllerAnnotationProviderMock(): ControllerAnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
-        $mock->method('get')->with('TestController::testMethod', Hash::class)->willReturn(new Hash([]));
+        $mock->method('getFromString')->with('TestController::testMethod', Hash::class)->willReturn(new Hash([]));
 
         return $mock;
     }
@@ -56,7 +56,7 @@ class ParametersProcessorFactoryTest extends TestCase
     protected function getNotExistingControllerAnnotationProviderMock(): ControllerAnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
-        $mock->method('get')->with('TestController::testMethod', Hash::class)->willReturn(null);
+        $mock->method('getFromString')->with('TestController::testMethod', Hash::class)->willReturn(null);
 
         return $mock;
     }
@@ -79,7 +79,7 @@ class ParametersProcessorFactoryTest extends TestCase
 
         return $this->getMockBuilder(ControllerAnnotationProvider::class)
             ->disableOriginalConstructor()
-            ->setMethods(['get'])
+            ->setMethods(['getFromString'])
             ->getMock();
     }
 
