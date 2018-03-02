@@ -10,6 +10,7 @@ use Pgs\HashIdBundle\Controller\DemoController;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ControllerAnnotationProviderTest extends TestCase
 {
@@ -39,7 +40,9 @@ class ControllerAnnotationProviderTest extends TestCase
         $result = $this->controllerAnnotationProvider->getFromString('Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
         $this->assertEquals(true, \is_object($result));
 
-        $controller = $this->getObjectMock();
+        $controller = $this->getControllerMock();
+        $result = $this->controllerAnnotationProvider->getFromObject($controller, 'demo', 'annotationClassName');
+        $this->assertEquals(true, \is_object($result));
     }
 
 
@@ -69,14 +72,14 @@ class ControllerAnnotationProviderTest extends TestCase
 
         $reflectionProviderMock
             ->method('getMethodReflectionFromObject')
-            ->with(new \stdClass(), 'demo')->willReturn($this->createMock(\ReflectionMethod::class));
+            ->with($this->getControllerMock(), 'demo')->willReturn($this->createMock(\ReflectionMethod::class));
 
         return $reflectionProviderMock;
     }
 
-    protected function getObjectMock()
+    protected function getControllerMock()
     {
-        $mock = $this->getMockBuilder('DemoController')->setMethods(['demo'])->getMock();
+        $mock = $this->getMockBuilder(Controller::class)->setMethods(['demo'])->getMockForAbstractClass();
         return $mock;
     }
 }
