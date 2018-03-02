@@ -5,6 +5,7 @@ namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
 
 
 use Pgs\HashIdBundle\Annotation\Hash;
+use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -14,6 +15,16 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
      * @var ParametersProcessorInterface
      */
     protected $decodeParametersProcessor;
+
+    public function __construct(
+        ControllerAnnotationProvider $annotationProvider,
+        ParametersProcessorInterface $noOpParametersProcessor,
+        ParametersProcessorInterface $decodeParametersProcessor
+    )
+    {
+        parent::__construct($annotationProvider, $noOpParametersProcessor);
+        $this->decodeParametersProcessor = $decodeParametersProcessor;
+    }
 
     protected function getDecodeParametersProcessor(): ParametersProcessorInterface
     {
