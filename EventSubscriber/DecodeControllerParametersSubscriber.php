@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class DecodeParametersSubscriber implements EventSubscriberInterface
+class DecodeControllerParametersSubscriber implements EventSubscriberInterface
 {
     protected $parametersProcessorFactory;
 

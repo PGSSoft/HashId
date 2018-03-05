@@ -9,7 +9,7 @@ parameters:
     pgs_hash_id.parameters_processor.factory.abstract.class: Pgs\HashIdBundle\ParametersProcessor\Factory\AbstractParametersProcessorFactory
     pgs_hash_id.parameters_processor.factory.encode.class: Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory
     pgs_hash_id.parameters_processor.factory.decode.class: Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory
-    pgs_hash_id.event_subscriber.decode_parameters.class: Pgs\HashIdBundle\EventSubscriber\DecodeParametersSubscriber
+    pgs_hash_id.event_subscriber.decode_controller_parameters.class: Pgs\HashIdBundle\EventSubscriber\DecodeControllerParametersSubscriber
 
 services:
     pgs_hash_id.hashids:
@@ -66,8 +66,8 @@ services:
         arguments:
             - '@pgs_hash_id.parameters_processor.decode'
 
-    pgs_hash_id.event_subscriber.decode_parameters:
-        class: '%pgs_hash_id.event_subscriber.decode_parameters.class%'
+    pgs_hash_id.event_subscriber.decode_controller_parameters:
+        class: '%pgs_hash_id.event_subscriber.decode_controller_parameters.class%'
         arguments:
             - '@pgs_hash_id.parameters_processor.factory.decode'
         tags:
