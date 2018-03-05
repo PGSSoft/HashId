@@ -12,8 +12,8 @@ class DecodeParametersProcessorFactoryTest extends ParametersProcessorFactoryTes
 {
     public function testCreateControllerDecodeParametersProcessor(): void
     {
-        $decodeParametersProcessor = $this->getParametersProcessorMock(Decode::class);
-        $noOpParametersProcessor = $this->getParametersProcessorMock(NoOp::class);
+        $decodeParametersProcessor = $this->getParametersProcessorMockProvider()->getParametersProcessorMock(Decode::class);
+        $noOpParametersProcessor = $this->getParametersProcessorMockProvider()->getParametersProcessorMock(NoOp::class);
         $parametersProcessorFactory = new DecodeParametersProcessorFactory(
             $this->getControllerAnnotationMockProvider()->getExistingControllerAnnotationProviderMock(),
             $noOpParametersProcessor,

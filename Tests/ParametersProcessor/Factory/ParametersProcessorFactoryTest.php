@@ -4,8 +4,9 @@
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor\Factory;
 
 
-use Pgs\HashIdBundle\Tests\AnnotationProvider\ControllerAnnotationMockProvider;
+use Pgs\HashIdBundle\Tests\AnnotationProvider\ControllerAnnotationProviderMockProvider;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
+use Pgs\HashIdBundle\Tests\ParametersProcessor\ParametersProcessorMockProvider;
 use Pgs\HashIdBundle\Tests\Route\RouteMockProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -17,11 +18,14 @@ abstract class ParametersProcessorFactoryTest extends TestCase
 
     protected $routeMockProvider;
 
+    protected $parametersProcessorMockProvider;
+
     protected function setUp()
     {
         $this->controllerMockProvider = new ControllerMockProvider();
-        $this->controllerAnnotationMockProvider = new ControllerAnnotationMockProvider();
+        $this->controllerAnnotationMockProvider = new ControllerAnnotationProviderMockProvider();
         $this->routeMockProvider = new RouteMockProvider();
+        $this->parametersProcessorMockProvider = new ParametersProcessorMockProvider();
     }
 
     public function getControllerMockProvider(): ControllerMockProvider
@@ -29,7 +33,7 @@ abstract class ParametersProcessorFactoryTest extends TestCase
         return $this->controllerMockProvider;
     }
 
-    public function getControllerAnnotationMockProvider(): ControllerAnnotationMockProvider
+    public function getControllerAnnotationMockProvider(): ControllerAnnotationProviderMockProvider
     {
         return $this->controllerAnnotationMockProvider;
     }
@@ -39,16 +43,8 @@ abstract class ParametersProcessorFactoryTest extends TestCase
         return $this->routeMockProvider;
     }
 
-    protected function getParametersProcessorMock($class)
+    public function getParametersProcessorMockProvider(): ParametersProcessorMockProvider
     {
-        $mock = $this
-            ->getMockBuilder($class)
-            ->disableOriginalConstructor()
-            ->setMethods(['setParametersToProcess'])
-            ->getMock();
-
-        $mock->method('setParametersToProcess')->willReturnSelf();
-
-        return $mock;
+        return $this->parametersProcessorMockProvider;
     }
 }

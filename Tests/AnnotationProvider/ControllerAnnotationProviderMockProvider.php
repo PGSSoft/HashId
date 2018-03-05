@@ -10,7 +10,7 @@ use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
 use PHPUnit\Framework\TestCase;
 
-class ControllerAnnotationMockProvider extends TestCase
+class ControllerAnnotationProviderMockProvider extends TestCase
 {
     protected $controllerMockProvider;
 
