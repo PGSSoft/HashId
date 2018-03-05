@@ -1,5 +1,5 @@
 {
-    "name": "pgs/hashid-bundle",
+    "name": "pgs-soft/hashid-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Hash Id",
     "keywords": [],
