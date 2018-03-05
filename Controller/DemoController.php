@@ -6,6 +6,7 @@ namespace Pgs\HashIdBundle\Controller;
 
 use Pgs\HashIdBundle\Annotation\Hash;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DemoController extends Controller
@@ -15,17 +16,17 @@ class DemoController extends Controller
         $url = $this->generateUrl('pgs_hash_id_demo_decode', ['id' => $id]);
 
         return new Response(
-            '<html><body>Provided id: '.$id.'<br />url: '.$url.'</body></html>'
+            '<html><body>Provided id: ' . $id . '<br />Url with encoded parameter: <a href="' . $url . '">' . $url . '</a></body></html>'
         );
     }
 
     /**
      * @Hash("id")
      */
-    public function decode($id)
+    public function decode(Request $request, $id)
     {
         return new Response(
-            '<html><body>Decoded id: '.$id.'<br /></body></html>'
+            '<html><body>Provided id: ' . $request->attributes->get('_route_params')['id'] . '<br />Decoded id: ' . $id . '<br /></body></html>'
         );
     }
 }
