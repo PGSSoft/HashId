@@ -5,5 +5,9 @@ pgs_hash_id_demo_encode:
       id: \d+
 
 pgs_hash_id_demo_decode:
-    path: /hash-id/demo/decode/{id}
+    path: /hash-id/demo/decode/{id}/{other}
     controller: Pgs\HashIdBundle\Controller\DemoController::decode
+
+pgs_hash_id_demo_decode_more:
+    path: /hash-id/demo/decode_more/{id}/{other}
+    controller: Pgs\HashIdBundle\Controller\DemoController::decodeMore
