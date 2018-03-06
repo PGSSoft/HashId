@@ -23,9 +23,10 @@ class RouterDecoratorTest extends WebTestCase
     public function testIsIdDifferent(): void
     {
         $id = 10;
-        $routeArgs = ['pgs_hash_id_demo_decode', ['id' => $id]];
+        $other = 20;
+        $routeArgs = ['pgs_hash_id_demo_decode', ['id' => $id, 'other' => $other]];
         $generatedPath = $this->router->generate(...$routeArgs);
-        $this->assertNotEquals(sprintf('/hash-id/demo/decode/%d', $id), $generatedPath);
-        $this->assertSame(1, preg_match('/\/hash-id\/demo\/decode\/\w+/', $generatedPath));
+        $this->assertNotEquals(sprintf('/hash-id/demo/decode/%d/%d', $id, $other), $generatedPath);
+        $this->assertSame(1, preg_match('/\/hash-id\/demo\/decode\/\w+\/\w+/', $generatedPath));
     }
 }

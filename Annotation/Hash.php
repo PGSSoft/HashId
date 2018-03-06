@@ -16,6 +16,10 @@ class Hash
 
     public function __construct(array $parameters)
     {
+        if (isset($parameters['value']) && is_array($parameters['value'])) {
+            $parameters = $parameters['value'];
+        }
+
         $this->parameters = $parameters;
     }
 

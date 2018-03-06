@@ -15,4 +15,13 @@ class HashTest extends TestCase
         $hash = new Hash($parameters);
         $this->assertSame(['id'], $hash->getParameters());
     }
+
+    public function testPassValueIndexedParameters()
+    {
+        $parameters = [
+            'value' => ['id', 'second']
+        ];
+        $hash = new Hash($parameters);
+        $this->assertSame($parameters['value'], $hash->getParameters());
+    }
 }
