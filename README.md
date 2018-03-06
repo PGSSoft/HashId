@@ -2,12 +2,12 @@
 
 Symfony 4 bundle for route parameters (integer) encoding and request parameters decoding with http://www.hashids.org/
 
-##Instalation
+## Instalation
 ```bash
     composer require pgs-soft/hashid-bundle 
 ```
 
-##Hashids configuration
+## Hashids configuration
 ```yaml
 # config/packages/hash_id.yaml
 #optional, default parameters provided
@@ -17,7 +17,7 @@ hash_id:
     min_hash_length: 20
 ```
 
-##Controller configuration
+## Controller configuration
 ```php
 use Pgs\HashIdBundle\Annotation\Hash;
 
