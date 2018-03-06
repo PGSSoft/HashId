@@ -9,7 +9,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    const ROOT_NAME = 'pgs_hash_id';
+    const ROOT_NAME = 'hash_id';
 
     const NODE_SALT = 'salt';
     const NODE_MIN_HASH_LENGTH = 'min_hash_length';
