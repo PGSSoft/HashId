@@ -1,10 +1,10 @@
 # [![PGS Software](https://www.pgs-soft.com/pgssoft-logo.png)](https://www.pgs-soft.com) / HashId
 
-Symfony 4 bundle for route parameters (integer) encoding and request parameters decoding with http://www.hashids.org/
+Symfony 4 bundle for encoding integer route parameters and decoding request parameters with http://www.hashids.org/
 
 ## Instalation
 ```bash
-    composer require pgs-soft/hashid-bundle 
+composer require pgs-soft/hashid-bundle 
 ```
 
 ## Hashids configuration

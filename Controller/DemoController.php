@@ -8,6 +8,7 @@ use Pgs\HashIdBundle\Annotation\Hash;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DemoController extends Controller
 {
@@ -47,8 +48,8 @@ EOT;
 
     private function getDecodeResponse(Request $request, int $id, int $other)
     {
-        $providedId = $request->attributes->get('_route_params')['id'];
-        $providedOther = $request->attributes->get('_route_params')['other'];
+        $providedId = $this->getRouteParam($request, 'id');
+        $providedOther = $this->getRouteParam($request, 'other');
 
         $response = <<<EOT
             <html>
@@ -59,5 +60,10 @@ EOT;
             </html>
 EOT;
         return $response;
+    }
+
+    private function getRouteParam(Request $request, $param)
+    {
+        return $request->attributes->get('_route_params')[$param];
     }
 }
