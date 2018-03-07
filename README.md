@@ -10,11 +10,11 @@ composer require pgs-soft/hashid-bundle
 ## Hashids configuration
 ```yaml
 # config/packages/hash_id.yaml
-#optional, default parameters provided
 
 hash_id:
     salt: 'my super salt'
     min_hash_length: 20
+    alphabet: 'qwertyasdzxc098765-'
 ```
 
 ## Controller configuration
@@ -32,9 +32,11 @@ class UserController extends Controller
     }
     
     /**
+     * Process multiple parameters - 'oneMore' will not be processed
+     * @Route(name="test", path="/test/{id}/{other}/{oneMore}")
      * @Hash({"id","other"})
      */
-    public function test(int $id, int $other)
+    public function test(int $id, int $other, int $oneMore)
     {
     //...
     }
@@ -42,6 +44,9 @@ class UserController extends Controller
 ```
 
 You can also check our `DemoController`
+
+## Doctrine Param Converter
+TBA
 
 ## Contributing
 
