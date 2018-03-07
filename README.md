@@ -9,9 +9,9 @@ composer require pgs-soft/hashid-bundle
 
 ## Hashids configuration
 ```yaml
-# config/packages/hash_id.yaml
+# config/packages/pgs_hash_id.yaml
 
-hash_id:
+pgs_hash_id:
     salt: 'my super salt'
     min_hash_length: 20
     alphabet: 'qwertyasdzxc098765-'
