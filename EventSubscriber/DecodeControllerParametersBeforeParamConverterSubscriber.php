@@ -5,29 +5,22 @@ namespace Pgs\HashIdBundle\EventSubscriber;
 
 
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 
-class DecodeControllerParametersSubscriber implements EventSubscriberInterface
+class DecodeControllerParametersBeforeParamConverterSubscriber extends ParamConverterListener
 {
     protected $decodeControllerParameters;
-
-    public function __construct(DecodeControllerParameters $decodeControllerParameters)
-    {
-        $this->decodeControllerParameters = $decodeControllerParameters;
-    }
 
     public function onKernelController(FilterControllerEvent $event): void
     {
         $this->getDecodeControllerParameters()->decodeControllerParameters($event);
+        parent::onKernelController($event);
     }
 
-    public static function getSubscribedEvents(): array
+    public function setDecodeControllerParameters(DecodeControllerParameters $decodeControllerParameters): void
     {
-        return [
-            KernelEvents::CONTROLLER => 'onKernelController'
-        ];
+        $this->decodeControllerParameters = $decodeControllerParameters;
     }
 
     public function getDecodeControllerParameters(): DecodeControllerParameters

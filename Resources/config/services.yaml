@@ -10,6 +10,7 @@ parameters:
     pgs_hash_id.parameters_processor.factory.encode.class: Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory
     pgs_hash_id.parameters_processor.factory.decode.class: Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory
     pgs_hash_id.event_subscriber.decode_controller_parameters.class: Pgs\HashIdBundle\EventSubscriber\DecodeControllerParametersSubscriber
+    pgs_hash_id.service.decode_controller_parameters.class: Pgs\HashIdBundle\Service\DecodeControllerParameters
 
 services:
     pgs_hash_id.hashids:
@@ -66,9 +67,6 @@ services:
         arguments:
             - '@pgs_hash_id.parameters_processor.decode'
 
-    pgs_hash_id.event_subscriber.decode_controller_parameters:
-        class: '%pgs_hash_id.event_subscriber.decode_controller_parameters.class%'
-        arguments:
-            - '@pgs_hash_id.parameters_processor.factory.decode'
-        tags:
-            - { name: kernel.event_subscriber }
+    pgs_hash_id.service.decode_controller_parameters:
+        class: '%pgs_hash_id.service.decode_controller_parameters.class%'
+        arguments: ['@pgs_hash_id.parameters_processor.factory.decode']

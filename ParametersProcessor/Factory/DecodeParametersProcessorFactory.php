@@ -8,7 +8,6 @@ use Pgs\HashIdBundle\Annotation\Hash;
 use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactory
 {
