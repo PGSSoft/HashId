@@ -4,29 +4,29 @@
 namespace Pgs\HashIdBundle\Tests\AnnotationProvider;
 
 use Doctrine\Common\Annotations\Reader;
-use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
-use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProviderInterface;
+use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
+use Pgs\HashIdBundle\AnnotationProvider\AnnotationProviderInterface;
 use Pgs\HashIdBundle\Controller\DemoController;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ControllerAnnotationProviderTest extends TestCase
+class AnnotationProviderTest extends TestCase
 {
     /**
-     * @var ControllerAnnotationProviderInterface
+     * @var AnnotationProviderInterface
      */
     protected $controllerAnnotationProvider;
 
     protected function setUp()
     {
-        $this->controllerAnnotationProvider = new ControllerAnnotationProvider($this->getReaderMock(), $this->getReflectionProviderMock());
+        $this->controllerAnnotationProvider = new AnnotationProvider($this->getReaderMock(), $this->getReflectionProviderMock());
     }
 
     public function testCreate(): void
     {
-        $this->assertInstanceOf(ControllerAnnotationProvider::class, $this->controllerAnnotationProvider);
+        $this->assertInstanceOf(AnnotationProvider::class, $this->controllerAnnotationProvider);
     }
 
     public function testInvalidControllerString(): void
@@ -45,6 +45,12 @@ class ControllerAnnotationProviderTest extends TestCase
         $this->assertEquals(true, \is_object($result));
     }
 
+    public function testInvalidControllerObject(): void
+    {
+        $this->expectException(InvalidControllerException::class);
+        $controller = 'dummy_controller_string';
+        $this->controllerAnnotationProvider->getFromObject($controller, 'demo', 'annotationClassName');
+    }
 
     protected function getReaderMock()
     {

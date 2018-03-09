@@ -5,7 +5,7 @@ namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
 
 
 use Pgs\HashIdBundle\Annotation\Hash;
-use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
+use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 use Symfony\Component\Routing\Route;
@@ -18,7 +18,7 @@ class EncodeParametersProcessorFactory extends AbstractParametersProcessorFactor
     protected $encodeParametersProcessor;
 
     public function __construct(
-        ControllerAnnotationProvider $annotationProvider,
+        AnnotationProvider $annotationProvider,
         ParametersProcessorInterface $noOpParametersProcessor,
         ParametersProcessorInterface $encodeParametersProcessor
     )

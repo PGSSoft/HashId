@@ -4,13 +4,13 @@
 namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
 
 
-use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
+use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 
 abstract class AbstractParametersProcessorFactory
 {
     /**
-     * @var ControllerAnnotationProvider
+     * @var AnnotationProvider
      */
     protected $annotationProvider;
 
@@ -20,7 +20,7 @@ abstract class AbstractParametersProcessorFactory
     protected $noOpParametersProcessor;
 
     public function __construct(
-        ControllerAnnotationProvider $annotationProvider,
+        AnnotationProvider $annotationProvider,
         ParametersProcessorInterface $noOpParametersProcessor
     )
     {
@@ -34,7 +34,7 @@ abstract class AbstractParametersProcessorFactory
         return $this->noOpParametersProcessor;
     }
 
-    protected function getAnnotationProvider(): ControllerAnnotationProvider
+    protected function getAnnotationProvider(): AnnotationProvider
     {
         return $this->annotationProvider;
     }

@@ -5,7 +5,8 @@ namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
 
 
 use Pgs\HashIdBundle\Annotation\Hash;
-use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
+use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
+use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -17,7 +18,7 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
     protected $decodeParametersProcessor;
 
     public function __construct(
-        ControllerAnnotationProvider $annotationProvider,
+        AnnotationProvider $annotationProvider,
         ParametersProcessorInterface $noOpParametersProcessor,
         ParametersProcessorInterface $decodeParametersProcessor
     )
@@ -33,10 +34,11 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
 
     public function createControllerDecodeParametersProcessor($controller, string $method)
     {
-        $annotation = null;
-        if ($controller instanceof Controller){
+        try {
             /** @var Hash $annotation */
             $annotation = $this->getAnnotationProvider()->getFromObject($controller, $method, Hash::class);
+        } catch (InvalidControllerException $e) {
+            $annotation = null;
         }
         return $annotation !== null ? $this->getDecodeParametersProcessor()->setParametersToProcess($annotation->getParameters()) : $this->getNoOpParametersProcessor();
     }

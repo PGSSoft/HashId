@@ -7,9 +7,8 @@ namespace Pgs\HashIdBundle\AnnotationProvider;
 use Doctrine\Common\Annotations\Reader;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ControllerAnnotationProvider implements ControllerAnnotationProviderInterface
+class AnnotationProvider implements AnnotationProviderInterface
 {
     /**
      * @var Reader
@@ -35,8 +34,11 @@ class ControllerAnnotationProvider implements ControllerAnnotationProviderInterf
         return $this->reader->getMethodAnnotation($reflection, $annotationClassName);
     }
 
-    public function getFromObject(Controller $controller, string $method, string $annotationClassName)
+    public function getFromObject($controller, string $method, string $annotationClassName)
     {
+        if (!\is_object($controller)){
+            throw new InvalidControllerException('Provided controller is not an object');
+        }
         $reflection = $this->reflectionProvider->getMethodReflectionFromObject($controller, $method);
         return $this->reader->getMethodAnnotation($reflection, $annotationClassName);
     }

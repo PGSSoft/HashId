@@ -5,7 +5,7 @@ namespace Pgs\HashIdBundle\Tests\AnnotationProvider;
 
 
 use Pgs\HashIdBundle\Annotation\Hash;
-use Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider;
+use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +24,7 @@ class ControllerAnnotationProviderMockProvider extends TestCase
         return $this->controllerMockProvider;
     }
 
-    public function getExistingControllerAnnotationProviderMock(): ControllerAnnotationProvider
+    public function getExistingControllerAnnotationProviderMock(): AnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
         $mock->method('getFromString')->with('TestController::testMethod', Hash::class)->willReturn(new Hash([]));
@@ -33,7 +33,15 @@ class ControllerAnnotationProviderMockProvider extends TestCase
         return $mock;
     }
 
-    public function getNotExistingControllerAnnotationProviderMock(): ControllerAnnotationProvider
+    public function getInvalidControllerExceptionControllerAnnotationProviderMock(): AnnotationProvider
+    {
+        $mock = $this->getControllerAnnotationProviderMock();
+        $mock->method('getFromObject')->with('test_controller_string', 'testMethod', Hash::class)->willThrowException(new InvalidControllerException());
+
+        return $mock;
+    }
+
+    public function getNotExistingControllerAnnotationProviderMock(): AnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
         $mock->method('getFromString')
@@ -42,7 +50,7 @@ class ControllerAnnotationProviderMockProvider extends TestCase
         return $mock;
     }
 
-    public function getExceptionThrowControllerAnnotationProviderMock(): ControllerAnnotationProvider
+    public function getExceptionThrowControllerAnnotationProviderMock(): AnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
         $mock->method('getFromString')->with('bad_controller_string', Hash::class)->willThrowException(new InvalidControllerException());
@@ -53,7 +61,7 @@ class ControllerAnnotationProviderMockProvider extends TestCase
     private function getControllerAnnotationProviderMock()
     {
 
-        return $this->getMockBuilder(ControllerAnnotationProvider::class)
+        return $this->getMockBuilder(AnnotationProvider::class)
             ->disableOriginalConstructor()
             ->setMethods(['getFromString', 'getFromObject'])
             ->getMock();

@@ -2,7 +2,7 @@ parameters:
     pgs_hash_id.hashids.class: Hashids\Hashids
     pgs_hash_id.decorator.router.class: Pgs\HashIdBundle\Decorator\RouterDecorator
     pgs_hash_id.reflection_provider.class: Pgs\HashIdBundle\Reflection\ReflectionProvider
-    pgs_hash_id.annotation_provider.controller.class: Pgs\HashIdBundle\AnnotationProvider\ControllerAnnotationProvider
+    pgs_hash_id.annotation_provider.class: Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider
     pgs_hash_id.parameters_processor.encode.class: Pgs\HashIdBundle\ParametersProcessor\Encode
     pgs_hash_id.parameters_processor.decode.class: Pgs\HashIdBundle\ParametersProcessor\Decode
     pgs_hash_id.parameters_processor.no_op.class: Pgs\HashIdBundle\ParametersProcessor\NoOp
@@ -30,8 +30,8 @@ services:
     pgs_hash_id.reflection_provider:
         class: '%pgs_hash_id.reflection_provider.class%'
 
-    pgs_hash_id.annotation_provider.controller:
-        class: '%pgs_hash_id.annotation_provider.controller.class%'
+    pgs_hash_id.annotation_provider:
+        class: '%pgs_hash_id.annotation_provider.class%'
         arguments:
           - '@annotation_reader'
           - '@pgs_hash_id.reflection_provider'
@@ -51,7 +51,7 @@ services:
         class: '%pgs_hash_id.parameters_processor.factory.abstract.class%'
         abstract: true
         arguments:
-            - '@pgs_hash_id.annotation_provider.controller'
+            - '@pgs_hash_id.annotation_provider'
             - '@pgs_hash_id.parameters_processor.no_op'
 
     pgs_hash_id.parameters_processor.factory.encode:
