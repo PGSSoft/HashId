@@ -45,9 +45,6 @@ class UserController extends Controller
 
 You can also check our `DemoController`
 
-## Doctrine Param Converter
-TBA
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/__REPOSITORY__](https://github.com/PGSSoft/__REPOSITORY__).
