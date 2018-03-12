@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class PgsHashIdExtensionTest extends TestCase
 {
-    public function testExtensionLoad()
+    public function testExtensionLoad(): void
     {
         $container = new ContainerBuilder();
 
