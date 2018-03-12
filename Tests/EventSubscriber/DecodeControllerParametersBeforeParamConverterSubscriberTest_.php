@@ -9,7 +9,7 @@ use Pgs\HashIdBundle\Exception\MissingDependencyException;
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager;
 
-class DecodeControllerParametersBeforeParamConverterSubscriberTest extends AbstractEventSubscriberTest
+class DecodeControllerParametersBeforeParamConverterSubscriberTest_ extends AbstractEventSubscriberTest
 {
     public function testSubscribedEvents(): void
     {

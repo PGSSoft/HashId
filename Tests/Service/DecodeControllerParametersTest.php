@@ -10,6 +10,7 @@ use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
 use Pgs\HashIdBundle\Tests\ParametersProcessor\ParametersProcessorMockProvider;
 use PHPUnit\Framework\TestCase;
+use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -40,7 +41,36 @@ class DecodeControllerParametersTest extends TestCase
     {
         $decodeParametersProcessorFactory = $this->getDecodeParametersProcessorFactoryMock();
         $decodeControllerParameters = new DecodeControllerParameters($decodeParametersProcessorFactory);
-        $event = $this->getEventMock();
+        $event = $this->getEventMock([
+                [
+                    'id' => 'encoded',
+                    'name' => 'test'
+                ],
+                [
+                    'id' => 10,
+                    'name' => 'test'
+                ],
+            ]
+        );
+        $decodeControllerParameters->decodeControllerParameters($event);
+        $this->assertEquals(10, $event->getRequest()->attributes->all()['id']);
+    }
+
+    public function testDecodeControllerParametersWithParamConverter(): void
+    {
+        $decodeParametersProcessorFactory = $this->getDecodeParametersProcessorFactoryMock();
+        $decodeControllerParameters = new DecodeControllerParameters($decodeParametersProcessorFactory);
+        $decodeControllerParameters->setParamConverterListener($this->getDoctrineParamConverterListenerMock());
+        $event = $this->getEventMock([
+            [
+                'id' => 'encoded',
+                'name' => 'test'
+            ],
+            [
+                'id' => 10,
+                'name' => 'test'
+            ],
+        ]);
         $decodeControllerParameters->decodeControllerParameters($event);
         $this->assertEquals(10, $event->getRequest()->attributes->all()['id']);
     }
@@ -65,7 +95,7 @@ class DecodeControllerParametersTest extends TestCase
         return $mock;
     }
 
-    protected function getEventMock(): FilterControllerEvent
+    protected function getEventMock(array $requestConsecutiveCalls): FilterControllerEvent
     {
         $mock = $this->getMockBuilder(FilterControllerEvent::class)
             ->disableOriginalConstructor()
@@ -73,28 +103,28 @@ class DecodeControllerParametersTest extends TestCase
             ->getMock();
 
         $mock->method('getController')->willReturn([$this->getControllerMockProvider()->getTestControllerMock(), 'demo']);
-        $mock->method('getRequest')->willReturn($this->getRequestMock());
+        $mock->method('getRequest')->willReturn($this->getRequestMock($requestConsecutiveCalls));
 
         return $mock;
     }
 
 
-    protected function getRequestMock(): Request
+    protected function getRequestMock(array $consecutiveCalls): Request
     {
         $mock = $this->getMockBuilder(Request::class)
             ->getMock();
         $parametersBag = $this->getMockBuilder(ParameterBag::class)->setMethods(['all'])->getMock();
-        $parametersBag->method('all')->willReturnOnConsecutiveCalls(
-            [
-                'id' => 'encoded',
-                'name' => 'test'
-            ],
-            [
-                'id' => 10,
-                'name' => 'test'
-            ]
-        );
+        $parametersBag->method('all')->willReturnOnConsecutiveCalls(...$consecutiveCalls);
         $mock->attributes = $parametersBag;
+
+        return $mock;
+    }
+
+    protected function getDoctrineParamConverterListenerMock(): ParamConverterListener
+    {
+        $mock = $this->getMockBuilder(ParamConverterListener::class)
+            ->setMethods(['onKernelController'])
+            ->getMock();
 
         return $mock;
     }

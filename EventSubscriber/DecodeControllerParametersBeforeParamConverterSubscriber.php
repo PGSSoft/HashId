@@ -7,9 +7,10 @@ namespace Pgs\HashIdBundle\EventSubscriber;
 use Pgs\HashIdBundle\Exception\MissingDependencyException;
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
-class DecodeControllerParametersBeforeParamConverterSubscriber extends ParamConverterListener
+class DecodeControllerParametersBeforeParamConverterSubscriber implements EventSubscriberInterface
 {
     protected $decodeControllerParameters;
 
@@ -38,4 +39,9 @@ class DecodeControllerParametersBeforeParamConverterSubscriber extends ParamConv
         }
         return $this->decodeControllerParameters;
     }
+
+    public static function getSubscribedEvents()
+    {
+    }
+
 }
