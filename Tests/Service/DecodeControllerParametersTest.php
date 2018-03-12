@@ -123,6 +123,7 @@ class DecodeControllerParametersTest extends TestCase
     protected function getDoctrineParamConverterListenerMock(): ParamConverterListener
     {
         $mock = $this->getMockBuilder(ParamConverterListener::class)
+            ->disableOriginalConstructor()
             ->setMethods(['onKernelController'])
             ->getMock();
 

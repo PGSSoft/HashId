@@ -70,3 +70,9 @@ services:
     pgs_hash_id.service.decode_controller_parameters:
         class: '%pgs_hash_id.service.decode_controller_parameters.class%'
         arguments: ['@pgs_hash_id.parameters_processor.factory.decode']
+
+    pgs_hash_id.event_subscriber.decode_controller_parameters:
+        class: '%pgs_hash_id.event_subscriber.decode_controller_parameters.class%'
+        arguments: ['@pgs_hash_id.service.decode_controller_parameters']
+        tags:
+            - { name: kernel.event_subscriber }
