@@ -23,11 +23,15 @@ class PgsHashIdBundleTest extends TestCase
         $container = new ContainerBuilder();
         $bundle = new PgsHashIdBundle();
         $bundle->build($container);
+
+        $this->assertTrue(\in_array(EventSubscriberCompilerPass::class, $this->getPassesClasses($container), true));
+    }
+
+    private function getPassesClasses(ContainerBuilder $container): array
+    {
         $passes = $container->getCompilerPassConfig()->getPasses();
-        $passesClasses = array_map(function ($item) {
+        return array_map(function ($item) {
             return \get_class($item);
         }, $passes);
-
-        $this->assertTrue(\in_array(EventSubscriberCompilerPass::class, $passesClasses, true));
     }
 }
