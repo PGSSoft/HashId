@@ -40,7 +40,7 @@
         <whitelist>
             <directory>../src</directory>
             <exclude>
-                <directory>../src/vendor</directory>
+                <directory>../vendor</directory>
                 <directory>../src/Controller</directory>
                 <file>./bootstrap.php</file>
             </exclude>
