@@ -1,4 +1,4 @@
 /.idea
-/vendor
-/composer.lock
-/tests/coverage.xml
+vendor
+composer.lock
+tests/coverage.xml
