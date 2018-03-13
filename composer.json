@@ -18,14 +18,11 @@
         "doctrine/annotations": "^1.6"
     },
     "autoload": {
-        "psr-4": { "Pgs\\HashIdBundle\\": "" },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        "psr-4": { "Pgs\\HashIdBundle\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Pgs\\HashIdBundle\\Tests\\": "Tests/"
+            "Pgs\\HashIdBundle\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",
