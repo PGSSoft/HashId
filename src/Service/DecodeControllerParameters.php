@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Service;
-
 
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
@@ -39,7 +37,7 @@ class DecodeControllerParameters
 
     protected function processRequestParametersWithParamConverter(FilterControllerEvent $event): void
     {
-        if ($this->getParamConverterListener() !== null) {
+        if (null !== $this->getParamConverterListener()) {
             $this->getParamConverterListener()->onKernelController($event);
         }
     }
@@ -58,5 +56,4 @@ class DecodeControllerParameters
     {
         $this->paramConverterListener = $paramConverterListener;
     }
-
 }

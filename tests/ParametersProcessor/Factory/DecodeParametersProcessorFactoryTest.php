@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor\Factory;
-
 
 use Pgs\HashIdBundle\ParametersProcessor\Decode;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;
@@ -20,7 +18,7 @@ class DecodeParametersProcessorFactoryTest extends ParametersProcessorFactoryTes
             $decodeParametersProcessor
         );
 
-        $parametersProcessor = $parametersProcessorFactory->createControllerDecodeParametersProcessor($this->getControllerMockProvider()->getTestControllerMock(),'testMethod');
+        $parametersProcessor = $parametersProcessorFactory->createControllerDecodeParametersProcessor($this->getControllerMockProvider()->getTestControllerMock(), 'testMethod');
         $this->assertInstanceOf(\get_class($decodeParametersProcessor), $parametersProcessor);
     }
 
@@ -34,7 +32,7 @@ class DecodeParametersProcessorFactoryTest extends ParametersProcessorFactoryTes
             $decodeParametersProcessor
         );
 
-        $parametersProcessor = $parametersProcessorFactory->createControllerDecodeParametersProcessor('test_controller_string','testMethod');
+        $parametersProcessor = $parametersProcessorFactory->createControllerDecodeParametersProcessor('test_controller_string', 'testMethod');
         $this->assertInstanceOf(\get_class($noOpParametersProcessor), $parametersProcessor);
     }
 }

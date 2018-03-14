@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor\Factory;
-
 
 use Pgs\HashIdBundle\ParametersProcessor\Encode;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
@@ -10,7 +8,6 @@ use Pgs\HashIdBundle\ParametersProcessor\NoOp;
 
 class EncodeParametersProcessorFactoryTest extends ParametersProcessorFactoryTest
 {
-
     public function testCreateRouteEncodeParametersProcessor(): void
     {
         $encodeParametersProcessor = $this->getParametersProcessorMockProvider()->getParametersProcessorMock(Encode::class);
@@ -45,6 +42,5 @@ class EncodeParametersProcessorFactoryTest extends ParametersProcessorFactoryTes
         );
         $parametersProcessor = $parametersProcessorFactory->createRouteEncodeParametersProcessor($this->getRouteMockProvider()->getInvalidRouteMock());
         $this->assertInstanceOf(\get_class($noOpParametersProcessor), $parametersProcessor);
-
     }
 }

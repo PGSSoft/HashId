@@ -1,16 +1,17 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Traits;
-
 
 trait DecoratorTrait
 {
     protected $object;
+
     /**
      * @param string $method
-     * @param array $arguments
+     * @param array  $arguments
+     *
      * @return mixed
+     *
      * @throws \BadMethodCallException
      */
     public function __call($method, $arguments)

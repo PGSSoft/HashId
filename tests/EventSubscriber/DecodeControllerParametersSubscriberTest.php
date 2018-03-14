@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\EventSubscriber;
-
 
 use Pgs\HashIdBundle\EventSubscriber\DecodeControllerParametersSubscriber;
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
@@ -20,6 +18,6 @@ class DecodeControllerParametersSubscriberTest extends AbstractEventSubscriberTe
         $event = $this->getEventMock();
         $encodedParameters = $event->getRequest()->attributes->all();
         $subscriber->onKernelController($event);
-        $this->assertNotEquals($encodedParameters, $event->getRequest()->attributes->all());
+        $this->assertNotSame($encodedParameters, $event->getRequest()->attributes->all());
     }
 }

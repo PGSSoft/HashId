@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor;
 
 use Hashids\HashidsInterface;
@@ -25,7 +24,7 @@ class DecodeTest extends TestCase
         $decodeParametersProcessor = new Decode($this->getHashidMock(), []);
         $parametersToProcess = ['param1', 'param2'];
         $result = $decodeParametersProcessor->setParametersToProcess($parametersToProcess);
-        $this->assertEquals(true, $result instanceof ParametersProcessorInterface);
+        $this->assertTrue($result instanceof ParametersProcessorInterface);
         $this->assertSame($parametersToProcess, $decodeParametersProcessor->getParametersToProcess());
     }
 
@@ -46,7 +45,7 @@ class DecodeTest extends TestCase
             [
                 ['id'],
                 ['id' => 'encoded', 'slug' => 'slug'],
-                ['id' => 10, 'slug' => 'slug']
+                ['id' => 10, 'slug' => 'slug'],
             ],
             [
                 [],
@@ -60,5 +59,4 @@ class DecodeTest extends TestCase
             ],
         ];
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor;
 
 use Hashids\HashidsInterface;
@@ -9,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class EncodeTest extends TestCase
 {
-
     /**
      * @dataProvider encodeParametersDataProvider
      */
@@ -18,7 +16,7 @@ class EncodeTest extends TestCase
         $encodeParametersProcessor = new Encode($this->getHashidMock(), $parametersToEncode);
         $processedParameters = $encodeParametersProcessor->process($routeParameters);
         $this->assertSame($expected, $processedParameters);
-        $this->assertEquals(count($parametersToEncode) > 0, $encodeParametersProcessor->needToProcess());
+        $this->assertSame(count($parametersToEncode) > 0, $encodeParametersProcessor->needToProcess());
     }
 
     protected function getHashidMock()
@@ -38,7 +36,7 @@ class EncodeTest extends TestCase
             [
                 ['id'],
                 ['id' => 10, 'slug' => 'slug'],
-                ['id' => 'encoded', 'slug' => 'slug']
+                ['id' => 'encoded', 'slug' => 'slug'],
             ],
             [
                 [],

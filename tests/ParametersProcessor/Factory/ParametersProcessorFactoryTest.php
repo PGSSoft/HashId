@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor\Factory;
-
 
 use Pgs\HashIdBundle\Tests\AnnotationProvider\ControllerAnnotationProviderMockProvider;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;

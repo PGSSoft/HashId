@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\DependencyInjection;
-
 
 use Pgs\HashIdBundle\DependencyInjection\PgsHashIdExtension;
 use PHPUnit\Framework\TestCase;

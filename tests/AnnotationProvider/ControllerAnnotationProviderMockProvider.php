@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\AnnotationProvider;
-
 
 use Pgs\HashIdBundle\Annotation\Hash;
 use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
@@ -60,11 +58,9 @@ class ControllerAnnotationProviderMockProvider extends TestCase
 
     private function getControllerAnnotationProviderMock()
     {
-
         return $this->getMockBuilder(AnnotationProvider::class)
             ->disableOriginalConstructor()
             ->setMethods(['getFromString', 'getFromObject'])
             ->getMock();
     }
-
 }

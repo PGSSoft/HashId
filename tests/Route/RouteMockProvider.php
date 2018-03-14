@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\Route;
-
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Route;

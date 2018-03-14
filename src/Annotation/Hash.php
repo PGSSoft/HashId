@@ -1,17 +1,13 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Annotation;
-
 
 /**
  * @Annotation
  * @Target({"METHOD"})
- *
  */
 class Hash
 {
-
     private $parameters = [];
 
     public function __construct(array $parameters)
@@ -27,5 +23,4 @@ class Hash
     {
         return $this->parameters;
     }
-
 }

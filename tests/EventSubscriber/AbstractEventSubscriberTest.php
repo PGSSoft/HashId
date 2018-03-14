@@ -1,12 +1,8 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\EventSubscriber;
 
-
-use Pgs\HashIdBundle\EventSubscriber\DecodeControllerParametersSubscriber;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -31,7 +27,6 @@ abstract class AbstractEventSubscriberTest extends TestCase
         return $mock;
     }
 
-
     protected function getRequestMock(): Request
     {
         $mock = $this->getMockBuilder(Request::class)
@@ -40,16 +35,15 @@ abstract class AbstractEventSubscriberTest extends TestCase
         $parametersBag->method('all')->willReturnOnConsecutiveCalls(
             [
                 'id' => 'encoded',
-                'name' => 'test'
+                'name' => 'test',
             ],
             [
                 'id' => 10,
-                'name' => 'test'
+                'name' => 'test',
             ]
         );
         $mock->attributes = $parametersBag;
 
         return $mock;
     }
-
 }

@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\App;
 
-
-use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -27,5 +24,4 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config.yml');
     }
-
 }

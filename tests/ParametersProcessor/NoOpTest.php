@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor;
-
 
 use Hashids\HashidsInterface;
 use Pgs\HashIdBundle\ParametersProcessor\NoOp;
@@ -28,7 +26,7 @@ class NoOpTest extends TestCase
     {
         $processedParameters = $this->parametersProcessor->setParametersToProcess($parametersToProcess)->process($parameters);
 
-        $this->assertEquals($expected, $processedParameters);
+        $this->assertSame($expected, $processedParameters);
     }
 
     public function testSetParametersToProcess()
@@ -40,7 +38,7 @@ class NoOpTest extends TestCase
     public function testSetParametersToProcessReturnType()
     {
         $result = $this->parametersProcessor->setParametersToProcess(['foo', 'bar']);
-        $this->assertEquals(true, $result instanceof ParametersProcessorInterface);
+        $this->assertTrue($result instanceof ParametersProcessorInterface);
     }
 
     public function testConstructor()
@@ -51,7 +49,7 @@ class NoOpTest extends TestCase
 
     public function testGetNeedToProcess()
     {
-        $this->assertEquals(false, $this->parametersProcessor->needToProcess());
+        $this->assertFalse($this->parametersProcessor->needToProcess());
     }
 
     protected function getHashidMock()
@@ -65,19 +63,19 @@ class NoOpTest extends TestCase
             [
                 [],
                 [],
-                []
+                [],
             ],
             [
                 ['id'],
                 [
                     'id' => 10,
-                    'slug' => 'test'
+                    'slug' => 'test',
                 ],
                 [
                     'id' => 10,
-                    'slug' => 'test'
-                ]
-            ]
+                    'slug' => 'test',
+                ],
+            ],
         ];
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
-
 
 use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
@@ -22,12 +20,10 @@ abstract class AbstractParametersProcessorFactory
     public function __construct(
         AnnotationProvider $annotationProvider,
         ParametersProcessorInterface $noOpParametersProcessor
-    )
-    {
+    ) {
         $this->annotationProvider = $annotationProvider;
         $this->noOpParametersProcessor = $noOpParametersProcessor;
     }
-
 
     protected function getNoOpParametersProcessor(): ParametersProcessorInterface
     {
@@ -38,5 +34,4 @@ abstract class AbstractParametersProcessorFactory
     {
         return $this->annotationProvider;
     }
-
 }

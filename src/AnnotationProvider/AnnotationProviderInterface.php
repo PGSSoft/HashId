@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\AnnotationProvider;
-
 
 interface AnnotationProviderInterface
 {

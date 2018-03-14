@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\Traits;
-
 
 use Pgs\HashIdBundle\Tests\Traits\Fixtures\BaseTestClass;
 use Pgs\HashIdBundle\Tests\Traits\Fixtures\DecorateTestClass;
@@ -20,7 +18,7 @@ class DecoratorTraitTest extends TestCase
 
     public function testExistingMethodCall()
     {
-        $this->assertEquals(true, $this->decorateClass->existingMethod1());
+        $this->assertTrue($this->decorateClass->existingMethod1());
     }
 
     public function testNonExistingMethodCall()

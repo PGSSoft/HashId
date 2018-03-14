@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\ParametersProcessor;
-
 
 use Hashids\HashidsInterface;
 
@@ -24,6 +22,7 @@ abstract class AbstractParametersProcessor implements ParametersProcessorInterfa
     public function setParametersToProcess(array $parametersToProcess): ParametersProcessorInterface
     {
         $this->parametersToProcess = $parametersToProcess;
+
         return $this;
     }
 

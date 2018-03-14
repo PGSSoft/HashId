@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\DependencyInjection;
-
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Pgs\HashIdBundle\Annotation\Hash;
@@ -17,7 +15,7 @@ class PgsHashIdExtension extends Extension
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yaml');
 
@@ -34,6 +32,4 @@ class PgsHashIdExtension extends Extension
     {
         AnnotationRegistry::loadAnnotationClass(Hash::class);
     }
-
-
 }

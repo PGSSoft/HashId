@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests;
-
 
 use Pgs\HashIdBundle\DependencyInjection\Compiler\EventSubscriberCompilerPass;
 use Pgs\HashIdBundle\DependencyInjection\PgsHashIdExtension;
@@ -30,6 +28,7 @@ class PgsHashIdBundleTest extends TestCase
     private function getPassesClasses(ContainerBuilder $container): array
     {
         $passes = $container->getCompilerPassConfig()->getPasses();
+
         return array_map(function ($item) {
             return \get_class($item);
         }, $passes);

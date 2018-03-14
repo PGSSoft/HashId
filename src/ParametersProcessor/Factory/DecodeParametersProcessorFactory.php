@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
-
 
 use Pgs\HashIdBundle\Annotation\Hash;
 use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
@@ -20,8 +18,7 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
         AnnotationProvider $annotationProvider,
         ParametersProcessorInterface $noOpParametersProcessor,
         ParametersProcessorInterface $decodeParametersProcessor
-    )
-    {
+    ) {
         parent::__construct($annotationProvider, $noOpParametersProcessor);
         $this->decodeParametersProcessor = $decodeParametersProcessor;
     }
@@ -39,6 +36,7 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
         } catch (InvalidControllerException $e) {
             $annotation = null;
         }
-        return $annotation !== null ? $this->getDecodeParametersProcessor()->setParametersToProcess($annotation->getParameters()) : $this->getNoOpParametersProcessor();
+
+        return null !== $annotation ? $this->getDecodeParametersProcessor()->setParametersToProcess($annotation->getParameters()) : $this->getNoOpParametersProcessor();
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\EventSubscriber;
-
 
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -26,7 +24,7 @@ class DecodeControllerParametersSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::CONTROLLER => 'onKernelController'
+            KernelEvents::CONTROLLER => 'onKernelController',
         ];
     }
 

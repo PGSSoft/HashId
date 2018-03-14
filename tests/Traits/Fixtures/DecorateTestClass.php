@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\Traits\Fixtures;
-
 
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 

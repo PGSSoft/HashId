@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\Reflection;
-
 
 use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
@@ -39,5 +37,4 @@ class ReflectionProviderTest extends TestCase
         $methodReflection = $reflectionProvider->getMethodReflectionFromObject(new ExistingClass(), 'nonExistingMethod');
         $this->assertInstanceOf(\ReflectionMethod::class, $methodReflection);
     }
-
 }

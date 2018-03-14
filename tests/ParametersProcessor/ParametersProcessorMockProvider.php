@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor;
-
 
 use PHPUnit\Framework\TestCase;
 

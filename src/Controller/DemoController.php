@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Controller;
-
 
 use Pgs\HashIdBundle\Annotation\Hash;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class DemoController extends Controller
 {
@@ -27,6 +24,7 @@ class DemoController extends Controller
                 </body>
             </html>
 EOT;
+
         return new Response($response);
     }
 
@@ -59,6 +57,7 @@ EOT;
                 </body>
             </html>
 EOT;
+
         return $response;
     }
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\Service;
-
 
 use Pgs\HashIdBundle\ParametersProcessor\Decode;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;
@@ -44,16 +42,16 @@ class DecodeControllerParametersTest extends TestCase
         $event = $this->getEventMock([
                 [
                     'id' => 'encoded',
-                    'name' => 'test'
+                    'name' => 'test',
                 ],
                 [
                     'id' => 10,
-                    'name' => 'test'
+                    'name' => 'test',
                 ],
             ]
         );
         $decodeControllerParameters->decodeControllerParameters($event);
-        $this->assertEquals(10, $event->getRequest()->attributes->all()['id']);
+        $this->assertSame(10, $event->getRequest()->attributes->all()['id']);
     }
 
     public function testDecodeControllerParametersWithParamConverter(): void
@@ -64,15 +62,15 @@ class DecodeControllerParametersTest extends TestCase
         $event = $this->getEventMock([
             [
                 'id' => 'encoded',
-                'name' => 'test'
+                'name' => 'test',
             ],
             [
                 'id' => 10,
-                'name' => 'test'
+                'name' => 'test',
             ],
         ]);
         $decodeControllerParameters->decodeControllerParameters($event);
-        $this->assertEquals(10, $event->getRequest()->attributes->all()['id']);
+        $this->assertSame(10, $event->getRequest()->attributes->all()['id']);
     }
 
     protected function getDecodeParametersProcessorFactoryMock(): DecodeParametersProcessorFactory
@@ -108,7 +106,6 @@ class DecodeControllerParametersTest extends TestCase
         return $mock;
     }
 
-
     protected function getRequestMock(array $consecutiveCalls): Request
     {
         $mock = $this->getMockBuilder(Request::class)
@@ -129,5 +126,4 @@ class DecodeControllerParametersTest extends TestCase
 
         return $mock;
     }
-
 }

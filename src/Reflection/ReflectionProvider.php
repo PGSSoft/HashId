@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Reflection;
-
 
 use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 

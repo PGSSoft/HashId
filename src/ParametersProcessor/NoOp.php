@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\ParametersProcessor;
-
 
 class NoOp implements ParametersProcessorInterface
 {
@@ -21,6 +19,7 @@ class NoOp implements ParametersProcessorInterface
     public function setParametersToProcess(array $parametersToProcess): ParametersProcessorInterface
     {
         $this->parametersToProcess = [];
+
         return $this;
     }
 

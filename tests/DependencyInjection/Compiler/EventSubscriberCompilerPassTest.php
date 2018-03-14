@@ -50,5 +50,4 @@ class EventSubscriberCompilerPassTest extends TestCase
         $listenerDefinition = $this->container->getDefinition('sensio_framework_extra.converter.listener');
         $this->assertFalse($listenerDefinition->hasTag('kernel.event_subscriber'));
     }
-
 }

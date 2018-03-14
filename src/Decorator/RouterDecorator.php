@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Decorator;
-
 
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
@@ -37,7 +35,7 @@ class RouterDecorator implements RouterInterface
 
     private function processParameters(?Route $route, array &$parameters): void
     {
-        if ($route !== null) {
+        if (null !== $route) {
             $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route);
             if ($parametersProcessor->needToProcess()) {
                 $parameters = $parametersProcessor->process($parameters);
@@ -76,6 +74,4 @@ class RouterDecorator implements RouterInterface
     {
         return $this->getRouter()->match($pathinfo);
     }
-
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\AnnotationProvider;
 
 use Doctrine\Common\Annotations\Reader;
@@ -38,11 +37,11 @@ class AnnotationProviderTest extends TestCase
     public function testReturnObject(): void
     {
         $result = $this->controllerAnnotationProvider->getFromString('Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
-        $this->assertEquals(true, \is_object($result));
+        $this->assertTrue(\is_object($result));
 
         $controller = $this->getControllerMock();
         $result = $this->controllerAnnotationProvider->getFromObject($controller, 'demo', 'annotationClassName');
-        $this->assertEquals(true, \is_object($result));
+        $this->assertTrue(\is_object($result));
     }
 
     public function testInvalidControllerObject(): void
@@ -69,7 +68,7 @@ class AnnotationProviderTest extends TestCase
         $reflectionProviderMock = $this->getMockBuilder(ReflectionProvider::class)
             ->setMethods([
                 'getMethodReflectionFromClassString',
-                'getMethodReflectionFromObject'
+                'getMethodReflectionFromObject',
             ])
             ->getMock();
         $reflectionProviderMock
@@ -86,6 +85,7 @@ class AnnotationProviderTest extends TestCase
     protected function getControllerMock()
     {
         $mock = $this->getMockBuilder(Controller::class)->setMethods(['demo'])->getMockForAbstractClass();
+
         return $mock;
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pgs\HashIdBundle\Tests\DependencyInjection;
 
 use Pgs\HashIdBundle\DependencyInjection\Configuration;
@@ -13,11 +12,12 @@ class ConfigurationTest extends TestCase
         $configuration = new Configuration();
         $treeBuilder = $configuration->getConfigTreeBuilder();
         $tree = $treeBuilder->buildTree();
-        $this->assertEquals(Configuration::ROOT_NAME, $tree->getName());
+        $this->assertSame(Configuration::ROOT_NAME, $tree->getName());
     }
 
     /**
      * @dataProvider dataTestConfiguration
+     *
      * @param array $inputConfig
      * @param array $expectedConfig
      */
@@ -30,7 +30,7 @@ class ConfigurationTest extends TestCase
         $normalizedConfig = $node->normalize($inputConfig);
         $finalizedConfig = $node->finalize($normalizedConfig);
 
-        $this->assertEquals($expectedConfig, $finalizedConfig);
+        $this->assertSame($expectedConfig, $finalizedConfig);
     }
 
     public function dataTestConfiguration()
@@ -42,7 +42,7 @@ class ConfigurationTest extends TestCase
                     Configuration::NODE_SALT => null,
                     Configuration::NODE_MIN_HASH_LENGTH => 10,
                     Configuration::NODE_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                ]
+                ],
             ],
             [
                 [
@@ -52,7 +52,7 @@ class ConfigurationTest extends TestCase
                     Configuration::NODE_SALT => 'test_salt',
                     Configuration::NODE_MIN_HASH_LENGTH => 10,
                     Configuration::NODE_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                ]
+                ],
             ],
             [
                 [
@@ -64,7 +64,7 @@ class ConfigurationTest extends TestCase
                     Configuration::NODE_SALT => 'test_salt',
                     Configuration::NODE_MIN_HASH_LENGTH => 10,
                     Configuration::NODE_ALPHABET => 'abcABC',
-                ]
+                ],
             ],
         ];
     }
