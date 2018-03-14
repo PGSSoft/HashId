@@ -47,7 +47,7 @@ You can also check our `DemoController`
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/__REPOSITORY__](https://github.com/PGSSoft/__REPOSITORY__).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/HashId](https://github.com/PGSSoft/HashId).
 
 
 ## About
