@@ -1,4 +1,4 @@
 framework:
     secret:          secret
     test: ~
-    router:          { resource: "%kernel.root_dir%/routing.yml" }
+    router:          { resource: "%kernel.root_dir%/../../src/Resources/routes.yaml" }
