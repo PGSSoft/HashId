@@ -18,7 +18,7 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="KERNEL_CLASS" value="\Pgs\HashIdBundle\Tests\App\AppKernel" />
         <ini name='display_errors' value='1' />
         <ini name='display_startup_errors' value='1' />
         <ini name='error_reporting' value='-1' />

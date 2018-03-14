@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1520952068">
-  <project timestamp="1520952068">
+<coverage generated="1521025028">
+  <project timestamp="1521025028">
     <package name="Pgs\HashIdBundle\Annotation">
       <file name="/var/www/symfony/vendor/pgs-soft/hashid-bundle/src/Annotation/Hash.php">
         <class name="Pgs\HashIdBundle\Annotation\Hash" namespace="Pgs\HashIdBundle\Annotation">
           <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
         </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="4"/>
-        <line num="19" type="stmt" count="4"/>
-        <line num="20" type="stmt" count="1"/>
-        <line num="23" type="stmt" count="4"/>
-        <line num="24" type="stmt" count="4"/>
-        <line num="26" type="method" name="getParameters" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="28" type="stmt" count="4"/>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="5"/>
+        <line num="19" type="stmt" count="5"/>
+        <line num="20" type="stmt" count="2"/>
+        <line num="23" type="stmt" count="5"/>
+        <line num="24" type="stmt" count="5"/>
+        <line num="26" type="method" name="getParameters" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="28" type="stmt" count="5"/>
         <metrics loc="30" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
       </file>
     </package>
@@ -21,16 +21,16 @@
         <class name="Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider" namespace="Pgs\HashIdBundle\AnnotationProvider">
           <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
         </class>
-        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="22" type="stmt" count="4"/>
-        <line num="23" type="stmt" count="4"/>
-        <line num="24" type="stmt" count="4"/>
-        <line num="26" type="method" name="getFromString" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="29" type="stmt" count="2"/>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="22" type="stmt" count="5"/>
+        <line num="23" type="stmt" count="5"/>
+        <line num="24" type="stmt" count="5"/>
+        <line num="26" type="method" name="getFromString" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="28" type="stmt" count="3"/>
+        <line num="29" type="stmt" count="3"/>
         <line num="30" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <line num="34" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="2"/>
         <line num="37" type="method" name="getFromObject" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="39" type="stmt" count="2"/>
         <line num="40" type="stmt" count="1"/>
@@ -45,33 +45,25 @@
     <package name="Pgs\HashIdBundle\Decorator">
       <file name="/var/www/symfony/vendor/pgs-soft/hashid-bundle/src/Decorator/RouterDecorator.php">
         <class name="Pgs\HashIdBundle\Decorator\RouterDecorator" namespace="Pgs\HashIdBundle\Decorator">
-          <metrics complexity="11" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="24" coveredelements="0"/>
+          <metrics complexity="11" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
         </class>
-        <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="20" type="stmt" count="0"/>
-        <line num="21" type="stmt" count="0"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="25" type="method" name="getRouter" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="30" type="method" name="generate" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="31" type="stmt" count="0"/>
-        <line num="32" type="stmt" count="0"/>
-        <line num="33" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="36" type="stmt" count="0"/>
-        <line num="38" type="method" name="processParameters" visibility="private" complexity="4" crap="20" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="44" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <metrics loc="80" ncloc="68" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="24" coveredelements="0"/>
+        <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="method" name="getRouter" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="30" type="method" name="generate" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="38" type="method" name="processParameters" visibility="private" complexity="4" crap="4" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="1"/>
+        <metrics loc="80" ncloc="68" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
       </file>
     </package>
     <package name="Pgs\HashIdBundle\DependencyInjection\Compiler">
@@ -94,37 +86,37 @@
         <class name="Pgs\HashIdBundle\DependencyInjection\Configuration" namespace="Pgs\HashIdBundle\DependencyInjection">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
         </class>
-        <line num="19" type="method" name="getConfigTreeBuilder" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="21" type="stmt" count="4"/>
-        <line num="22" type="stmt" count="4"/>
-        <line num="24" type="stmt" count="4"/>
-        <line num="25" type="stmt" count="4"/>
-        <line num="26" type="stmt" count="4"/>
-        <line num="27" type="stmt" count="4"/>
-        <line num="28" type="stmt" count="4"/>
-        <line num="30" type="stmt" count="4"/>
+        <line num="19" type="method" name="getConfigTreeBuilder" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="21" type="stmt" count="5"/>
+        <line num="22" type="stmt" count="5"/>
+        <line num="24" type="stmt" count="5"/>
+        <line num="25" type="stmt" count="5"/>
+        <line num="26" type="stmt" count="5"/>
+        <line num="27" type="stmt" count="5"/>
+        <line num="28" type="stmt" count="5"/>
+        <line num="30" type="stmt" count="5"/>
         <metrics loc="31" ncloc="31" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
       </file>
       <file name="/var/www/symfony/vendor/pgs-soft/hashid-bundle/src/DependencyInjection/PgsHashIdExtension.php">
         <class name="Pgs\HashIdBundle\DependencyInjection\PgsHashIdExtension" namespace="Pgs\HashIdBundle\DependencyInjection">
-          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
         </class>
-        <line num="16" type="method" name="load" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <line num="19" type="stmt" count="0"/>
-        <line num="20" type="stmt" count="0"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="25" type="stmt" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <line num="31" type="stmt" count="0"/>
-        <line num="33" type="method" name="registerAnnotation" visibility="private" complexity="1" crap="2" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="36" type="stmt" count="0"/>
-        <metrics loc="38" ncloc="38" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
+        <line num="16" type="method" name="load" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="18" type="stmt" count="1"/>
+        <line num="19" type="stmt" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="28" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="33" type="method" name="registerAnnotation" visibility="private" complexity="1" crap="1" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <metrics loc="38" ncloc="38" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
       </file>
     </package>
     <package name="Pgs\HashIdBundle\EventSubscriber">
@@ -173,24 +165,24 @@
         <class name="Pgs\HashIdBundle\ParametersProcessor\AbstractParametersProcessor" namespace="Pgs\HashIdBundle\ParametersProcessor">
           <metrics complexity="9" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="18" coveredelements="18"/>
         </class>
-        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="20" type="stmt" count="7"/>
-        <line num="21" type="stmt" count="7"/>
-        <line num="22" type="stmt" count="7"/>
-        <line num="24" type="method" name="setParametersToProcess" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="26" type="stmt" count="1"/>
-        <line num="27" type="stmt" count="1"/>
-        <line num="30" type="method" name="getParametersToProcess" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="32" type="stmt" count="7"/>
-        <line num="35" type="method" name="getHashIds" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="37" type="stmt" count="2"/>
-        <line num="40" type="method" name="process" visibility="public" complexity="3" crap="3" count="6"/>
-        <line num="42" type="stmt" count="6"/>
-        <line num="43" type="stmt" count="4"/>
-        <line num="44" type="stmt" count="4"/>
-        <line num="48" type="stmt" count="6"/>
-        <line num="51" type="method" name="needToProcess" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="53" type="stmt" count="3"/>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="20" type="stmt" count="8"/>
+        <line num="21" type="stmt" count="8"/>
+        <line num="22" type="stmt" count="8"/>
+        <line num="24" type="method" name="setParametersToProcess" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="26" type="stmt" count="2"/>
+        <line num="27" type="stmt" count="2"/>
+        <line num="30" type="method" name="getParametersToProcess" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="32" type="stmt" count="8"/>
+        <line num="35" type="method" name="getHashIds" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="37" type="stmt" count="3"/>
+        <line num="40" type="method" name="process" visibility="public" complexity="3" crap="3" count="7"/>
+        <line num="42" type="stmt" count="7"/>
+        <line num="43" type="stmt" count="5"/>
+        <line num="44" type="stmt" count="5"/>
+        <line num="48" type="stmt" count="7"/>
+        <line num="51" type="method" name="needToProcess" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="53" type="stmt" count="4"/>
         <metrics loc="56" ncloc="53" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="18" coveredelements="18"/>
       </file>
       <file name="/var/www/symfony/vendor/pgs-soft/hashid-bundle/src/ParametersProcessor/Decode.php">
@@ -206,8 +198,8 @@
         <class name="Pgs\HashIdBundle\ParametersProcessor\Encode" namespace="Pgs\HashIdBundle\ParametersProcessor">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="9" type="method" name="processValue" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="11" type="stmt" count="1"/>
+        <line num="9" type="method" name="processValue" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="11" type="stmt" count="2"/>
         <metrics loc="12" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/var/www/symfony/vendor/pgs-soft/hashid-bundle/src/ParametersProcessor/NoOp.php">
@@ -231,14 +223,14 @@
         <class name="Pgs\HashIdBundle\ParametersProcessor\Factory\AbstractParametersProcessorFactory" namespace="Pgs\HashIdBundle\ParametersProcessor\Factory">
           <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
         </class>
-        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="27" type="stmt" count="4"/>
-        <line num="28" type="stmt" count="4"/>
-        <line num="29" type="stmt" count="4"/>
+        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="27" type="stmt" count="5"/>
+        <line num="28" type="stmt" count="5"/>
+        <line num="29" type="stmt" count="5"/>
         <line num="32" type="method" name="getNoOpParametersProcessor" visibility="protected" complexity="1" crap="1" count="2"/>
         <line num="34" type="stmt" count="2"/>
-        <line num="37" type="method" name="getAnnotationProvider" visibility="protected" complexity="1" crap="1" count="4"/>
-        <line num="39" type="stmt" count="4"/>
+        <line num="37" type="method" name="getAnnotationProvider" visibility="protected" complexity="1" crap="1" count="5"/>
+        <line num="39" type="stmt" count="5"/>
         <metrics loc="41" ncloc="35" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
       </file>
       <file name="/var/www/symfony/vendor/pgs-soft/hashid-bundle/src/ParametersProcessor/Factory/DecodeParametersProcessorFactory.php">
@@ -262,18 +254,18 @@
         <class name="Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory" namespace="Pgs\HashIdBundle\ParametersProcessor\Factory">
           <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
         </class>
-        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="26" type="stmt" count="2"/>
-        <line num="27" type="stmt" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="31" type="method" name="createRouteEncodeParametersProcessor" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="33" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="2"/>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="26" type="stmt" count="3"/>
+        <line num="27" type="stmt" count="3"/>
+        <line num="28" type="stmt" count="3"/>
+        <line num="31" type="method" name="createRouteEncodeParametersProcessor" visibility="public" complexity="3" crap="3" count="3"/>
+        <line num="33" type="stmt" count="3"/>
+        <line num="36" type="stmt" count="3"/>
         <line num="37" type="stmt" count="1"/>
         <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="2"/>
-        <line num="43" type="method" name="getEncodeParametersProcessor" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="45" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="3"/>
+        <line num="43" type="method" name="getEncodeParametersProcessor" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="45" type="stmt" count="2"/>
         <metrics loc="46" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
       </file>
     </package>
@@ -297,8 +289,8 @@
         <class name="Pgs\HashIdBundle\Reflection\ReflectionProvider" namespace="Pgs\HashIdBundle\Reflection">
           <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
         </class>
-        <line num="11" type="method" name="getMethodReflectionFromClassString" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="14" type="stmt" count="2"/>
+        <line num="11" type="method" name="getMethodReflectionFromClassString" visibility="public" complexity="3" crap="3" count="3"/>
+        <line num="14" type="stmt" count="3"/>
         <line num="15" type="stmt" count="1"/>
         <line num="16" type="stmt" count="1"/>
         <line num="20" type="method" name="getMethodReflectionFromObject" visibility="public" complexity="3" crap="3" count="2"/>
@@ -354,6 +346,6 @@
         <metrics loc="23" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </file>
     </package>
-    <metrics files="24" loc="708" ncloc="665" classes="18" methods="49" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="143" coveredstatements="110" elements="192" coveredelements="153"/>
+    <metrics files="24" loc="708" ncloc="665" classes="18" methods="49" coveredmethods="49" conditionals="0" coveredconditionals="0" statements="135" coveredstatements="135" elements="184" coveredelements="184"/>
   </project>
 </coverage>

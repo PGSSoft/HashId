@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     const NODE_ALPHABET = 'alphabet';
 
 
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root(self::ROOT_NAME);
