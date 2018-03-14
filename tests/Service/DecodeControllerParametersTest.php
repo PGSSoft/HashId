@@ -39,7 +39,8 @@ class DecodeControllerParametersTest extends TestCase
     {
         $decodeParametersProcessorFactory = $this->getDecodeParametersProcessorFactoryMock();
         $decodeControllerParameters = new DecodeControllerParameters($decodeParametersProcessorFactory);
-        $event = $this->getEventMock([
+        $event = $this->getEventMock(
+            [
                 [
                     'id' => 'encoded',
                     'name' => 'test',
@@ -80,7 +81,8 @@ class DecodeControllerParametersTest extends TestCase
             ->setMethods(['createControllerDecodeParametersProcessor'])
             ->getMock();
 
-        $mock->method('createControllerDecodeParametersProcessor')->willReturn($this->getDecodeParametersProcessorMock());
+        $mock->method('createControllerDecodeParametersProcessor')
+            ->willReturn($this->getDecodeParametersProcessorMock());
 
         return $mock;
     }
@@ -100,8 +102,11 @@ class DecodeControllerParametersTest extends TestCase
             ->setMethods(['getController', 'getRequest'])
             ->getMock();
 
-        $mock->method('getController')->willReturn([$this->getControllerMockProvider()->getTestControllerMock(), 'demo']);
-        $mock->method('getRequest')->willReturn($this->getRequestMock($requestConsecutiveCalls));
+        $mock->method('getController')
+            ->willReturn([$this->getControllerMockProvider()->getTestControllerMock(), 'demo']);
+
+        $mock->method('getRequest')
+            ->willReturn($this->getRequestMock($requestConsecutiveCalls));
 
         return $mock;
     }

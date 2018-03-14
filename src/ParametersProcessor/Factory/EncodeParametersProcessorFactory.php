@@ -34,7 +34,9 @@ class EncodeParametersProcessorFactory extends AbstractParametersProcessorFactor
             $annotation = null;
         }
 
-        return null !== $annotation ? $this->getEncodeParametersProcessor()->setParametersToProcess($annotation->getParameters()) : $this->getNoOpParametersProcessor();
+        return null !== $annotation
+            ? $this->getEncodeParametersProcessor()->setParametersToProcess($annotation->getParameters())
+            : $this->getNoOpParametersProcessor();
     }
 
     protected function getEncodeParametersProcessor(): ParametersProcessorInterface

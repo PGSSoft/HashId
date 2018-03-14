@@ -17,7 +17,8 @@ trait DecoratorTrait
     public function __call($method, $arguments)
     {
         if (!method_exists($this->object, $method)) {
-            throw new \BadMethodCallException(sprintf('Object %s has no %s() method.', get_class($this->object), $method));
+            $message = sprintf('Object %s has no %s() method.', get_class($this->object), $method);
+            throw new \BadMethodCallException($message);
         }
 
         return call_user_func_array(array($this->object, $method), $arguments);

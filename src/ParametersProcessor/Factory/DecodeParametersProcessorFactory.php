@@ -32,11 +32,17 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
     {
         try {
             /** @var Hash $annotation */
-            $annotation = $this->getAnnotationProvider()->getFromObject($controller, $method, Hash::class);
+            $annotation = $this->getAnnotationProvider()->getFromObject(
+                $controller,
+                $method,
+                Hash::class
+            );
         } catch (InvalidControllerException $e) {
             $annotation = null;
         }
 
-        return null !== $annotation ? $this->getDecodeParametersProcessor()->setParametersToProcess($annotation->getParameters()) : $this->getNoOpParametersProcessor();
+        return null !== $annotation
+            ? $this->getDecodeParametersProcessor()->setParametersToProcess($annotation->getParameters())
+            : $this->getNoOpParametersProcessor();
     }
 }

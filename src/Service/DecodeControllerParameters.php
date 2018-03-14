@@ -21,13 +21,18 @@ class DecodeControllerParameters
     public function decodeControllerParameters(FilterControllerEvent $event): void
     {
         $controller = $event->getController();
-        $parametersProcessor = $this->getParametersProcessorFactory()->createControllerDecodeParametersProcessor(...$controller);
+        $parametersProcessor = $this
+            ->getParametersProcessorFactory()
+            ->createControllerDecodeParametersProcessor(...$controller);
+
         $this->processRequestParameters($event, $parametersProcessor);
         $this->processRequestParametersWithParamConverter($event);
     }
 
-    protected function processRequestParameters(FilterControllerEvent $event, ParametersProcessorInterface $parametersProcessor): void
-    {
+    protected function processRequestParameters(
+        FilterControllerEvent $event,
+        ParametersProcessorInterface $parametersProcessor
+    ): void {
         if ($parametersProcessor->needToProcess()) {
             $requestParams = $event->getRequest()->attributes->all();
             $processedParams = $parametersProcessor->process($requestParams);

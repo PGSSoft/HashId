@@ -26,7 +26,11 @@ class ControllerAnnotationProviderMockProvider extends TestCase
     {
         $mock = $this->getControllerAnnotationProviderMock();
         $mock->method('getFromString')->with('TestController::testMethod', Hash::class)->willReturn(new Hash([]));
-        $mock->method('getFromObject')->with($this->getControllerMockProvider()->getTestControllerMock(), 'testMethod', Hash::class)->willReturn(new Hash([]));
+        $mock->method('getFromObject')->with(
+            $this->getControllerMockProvider()->getTestControllerMock(),
+            'testMethod',
+            Hash::class
+        )->willReturn(new Hash([]));
 
         return $mock;
     }
@@ -34,7 +38,9 @@ class ControllerAnnotationProviderMockProvider extends TestCase
     public function getInvalidControllerExceptionControllerAnnotationProviderMock(): AnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
-        $mock->method('getFromObject')->with('test_controller_string', 'testMethod', Hash::class)->willThrowException(new InvalidControllerException());
+        $mock->method('getFromObject')
+            ->with('test_controller_string', 'testMethod', Hash::class)
+            ->willThrowException(new InvalidControllerException());
 
         return $mock;
     }
@@ -51,7 +57,9 @@ class ControllerAnnotationProviderMockProvider extends TestCase
     public function getExceptionThrowControllerAnnotationProviderMock(): AnnotationProvider
     {
         $mock = $this->getControllerAnnotationProviderMock();
-        $mock->method('getFromString')->with('bad_controller_string', Hash::class)->willThrowException(new InvalidControllerException());
+        $mock->method('getFromString')
+            ->with('bad_controller_string', Hash::class)
+            ->willThrowException(new InvalidControllerException());
 
         return $mock;
     }

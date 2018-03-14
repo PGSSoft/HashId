@@ -32,10 +32,12 @@ class RouterDecoratorTest extends WebTestCase
         $routeArgs = ['pgs_hash_id_demo_decode', ['id' => $id, 'other' => $other]];
         $generatedPath = $this->router->generate(...$routeArgs);
         $this->assertNotSame(sprintf('/hash-id/demo/decode/%d/%d', $id, $other), $generatedPath);
-        $this->assertSame(1, preg_match(sprintf('/\/hash-id\/demo\/decode\/[%s]+\/\d+/', $alphabet), $generatedPath));
+        $pattern = sprintf('/\/hash-id\/demo\/decode\/[%s]+\/\d+/', $alphabet);
+        $this->assertRegExp($pattern, $generatedPath);
 
         $routeArgs = ['pgs_hash_id_demo_decode_more', ['id' => $id, 'other' => $other]];
         $generatedPath = $this->router->generate(...$routeArgs);
-        $this->assertSame(1, preg_match(sprintf('/\/hash-id\/demo\/decode_more\/[%s]+\/[%s]+/', $alphabet, $alphabet), $generatedPath));
+        $pattern = sprintf('/\/hash-id\/demo\/decode_more\/[%s]+\/[%s]+/', $alphabet, $alphabet);
+        $this->assertRegExp($pattern, $generatedPath);
     }
 }

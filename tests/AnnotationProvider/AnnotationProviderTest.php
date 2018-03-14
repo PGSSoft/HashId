@@ -20,7 +20,10 @@ class AnnotationProviderTest extends TestCase
 
     protected function setUp()
     {
-        $this->controllerAnnotationProvider = new AnnotationProvider($this->getReaderMock(), $this->getReflectionProviderMock());
+        $this->controllerAnnotationProvider = new AnnotationProvider(
+            $this->getReaderMock(),
+            $this->getReflectionProviderMock()
+        );
     }
 
     public function testCreate(): void
@@ -36,7 +39,10 @@ class AnnotationProviderTest extends TestCase
 
     public function testReturnObject(): void
     {
-        $result = $this->controllerAnnotationProvider->getFromString('Pgs\HashIdBundle\Controller\DemoController::demo', 'annotationClassName');
+        $result = $this->controllerAnnotationProvider->getFromString(
+            'Pgs\HashIdBundle\Controller\DemoController::demo',
+            'annotationClassName'
+        );
         $this->assertTrue(\is_object($result));
 
         $controller = $this->getControllerMock();

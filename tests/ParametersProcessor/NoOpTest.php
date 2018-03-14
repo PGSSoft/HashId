@@ -24,7 +24,10 @@ class NoOpTest extends TestCase
      */
     public function testAreParametersNotChanged(array $parametersToProcess, array $parameters, array $expected)
     {
-        $processedParameters = $this->parametersProcessor->setParametersToProcess($parametersToProcess)->process($parameters);
+        $processedParameters = $this
+            ->parametersProcessor
+            ->setParametersToProcess($parametersToProcess)
+            ->process($parameters);
 
         $this->assertSame($expected, $processedParameters);
     }

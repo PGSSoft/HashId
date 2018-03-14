@@ -25,7 +25,8 @@ class AnnotationProvider implements AnnotationProviderInterface
     {
         $explodedControllerString = explode('::', $controller);
         if (2 !== \count($explodedControllerString)) {
-            throw new InvalidControllerException(sprintf('The "%s" controller is not a valid "class::method" string.', $controller));
+            $message = sprintf('The "%s" controller is not a valid "class::method" string.', $controller);
+            throw new InvalidControllerException($message);
         }
         $reflection = $this->reflectionProvider->getMethodReflectionFromClassString(...$explodedControllerString);
 

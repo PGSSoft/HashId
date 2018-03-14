@@ -38,10 +38,16 @@ class EventSubscriberCompilerPassTest extends TestCase
         $paramConverterListenerDefinition = new Definition();
         $paramConverterListenerDefinition->addTag('kernel.event_subscriber');
         $this->paramConverterListenerDefinition = $paramConverterListenerDefinition;
-        $this->container->setDefinition('sensio_framework_extra.converter.listener', $this->paramConverterListenerDefinition);
+        $this->container->setDefinition(
+            'sensio_framework_extra.converter.listener',
+            $this->paramConverterListenerDefinition
+        );
 
         $this->decodeControllerParametersDefinition = new Definition();
-        $this->container->setDefinition('pgs_hash_id.service.decode_controller_parameters', $this->decodeControllerParametersDefinition);
+        $this->container->setDefinition(
+            'pgs_hash_id.service.decode_controller_parameters',
+            $this->decodeControllerParametersDefinition
+        );
     }
 
     public function testProcessForExistingParamConverterListener(): void
