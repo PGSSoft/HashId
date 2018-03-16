@@ -1,5 +1,10 @@
 # [![PGS Software](https://www.pgs-soft.com/pgssoft-logo.png)](https://www.pgs-soft.com) / HashId
 
+![PHP from Packagist](https://img.shields.io/packagist/php-v/symfony/symfony.svg)
+[![Build Status](https://scrutinizer-ci.com/g/kjonski/HashId/badges/build.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/build-status/dev-master)
+[![Code Coverage](https://scrutinizer-ci.com/g/kjonski/HashId/badges/coverage.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kjonski/HashId/badges/quality-score.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
+
 Symfony 4 bundle for encoding integer route parameters and decoding request parameters with http://www.hashids.org/
 
 ## Instalation
