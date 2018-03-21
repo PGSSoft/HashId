@@ -8,6 +8,6 @@ class Decode extends AbstractParametersProcessor
     {
         $result = $this->getHashIds()->decode($value);
 
-        return $result ? $result[0] : $value;
+        return $result[0] ?? $value;
     }
 }

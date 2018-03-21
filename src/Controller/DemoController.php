@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DemoController extends Controller
 {
-    public function encode($id)
+    public function encode($id): Response
     {
         $other = 30;
         $url1 = $this->generateUrl('pgs_hash_id_demo_decode', ['id' => $id, 'other' => $other]);
@@ -31,7 +31,7 @@ EOT;
     /**
      * @Hash("id")
      */
-    public function decode(Request $request, int $id, int $other)
+    public function decode(Request $request, int $id, int $other): Response
     {
         return new Response($this->getDecodeResponse($request, $id, $other));
     }
@@ -39,12 +39,12 @@ EOT;
     /**
      * @Hash({"id", "other"})
      */
-    public function decodeMore(Request $request, int $id, int $other)
+    public function decodeMore(Request $request, int $id, int $other): Response
     {
         return new Response($this->getDecodeResponse($request, $id, $other));
     }
 
-    private function getDecodeResponse(Request $request, int $id, int $other)
+    private function getDecodeResponse(Request $request, int $id, int $other): string
     {
         $providedId = $this->getRouteParam($request, 'id');
         $providedOther = $this->getRouteParam($request, 'other');

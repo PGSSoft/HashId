@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pgs\HashIdBundle\Decorator;
 
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
+use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,6 +30,17 @@ class RouterDecorator implements RouterInterface
         return $this->object;
     }
 
+    /**
+     * @param string $name
+     * @param array  $parameters
+     * @param int    $referenceType
+     *
+     * @throws RouteNotFoundException
+     * @throws MissingMandatoryParametersException
+     * @throws InvalidParameterException
+     *
+     * @return string
+     */
     public function generate($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH): string
     {
         $route = $this->getRouter()->getRouteCollection()->get($name);

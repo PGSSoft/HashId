@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pgs\HashIdBundle\Service;
 
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;

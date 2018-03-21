@@ -42,7 +42,6 @@
             <exclude>
                 <directory>../vendor</directory>
                 <directory>../src/Controller</directory>
-                <file>./bootstrap.php</file>
             </exclude>
         </whitelist>
     </filter>

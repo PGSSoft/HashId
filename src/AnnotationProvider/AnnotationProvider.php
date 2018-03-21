@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pgs\HashIdBundle\AnnotationProvider;
 
 use Doctrine\Common\Annotations\Reader;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
+use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
 
 class AnnotationProvider implements AnnotationProviderInterface
@@ -13,6 +16,9 @@ class AnnotationProvider implements AnnotationProviderInterface
      */
     protected $reader;
 
+    /**
+     * @var ReflectionProvider
+     */
     protected $reflectionProvider;
 
     public function __construct(Reader $reader, ReflectionProvider $reflectionProvider)
@@ -21,6 +27,15 @@ class AnnotationProvider implements AnnotationProviderInterface
         $this->reflectionProvider = $reflectionProvider;
     }
 
+    /**
+     * @param string $controller
+     * @param string $annotationClassName
+     *
+     * @throws InvalidControllerException
+     * @throws MissingClassOrMethodException
+     *
+     * @return null|object
+     */
     public function getFromString(string $controller, string $annotationClassName)
     {
         $explodedControllerString = explode('::', $controller);
@@ -33,6 +48,16 @@ class AnnotationProvider implements AnnotationProviderInterface
         return $this->reader->getMethodAnnotation($reflection, $annotationClassName);
     }
 
+    /**
+     * @param object $controller
+     * @param string $method
+     * @param string $annotationClassName
+     *
+     * @throws InvalidControllerException
+     * @throws MissingClassOrMethodException
+     *
+     * @return null|object
+     */
     public function getFromObject($controller, string $method, string $annotationClassName)
     {
         if (!\is_object($controller)) {

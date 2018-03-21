@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
 
 use Pgs\HashIdBundle\Annotation\Hash;
 use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
+use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 use Symfony\Component\Routing\Route;
 
@@ -30,7 +33,7 @@ class EncodeParametersProcessorFactory extends AbstractParametersProcessorFactor
         try {
             /** @var Hash $annotation */
             $annotation = $this->getAnnotationProvider()->getFromString($controller, Hash::class);
-        } catch (InvalidControllerException $e) {
+        } catch (InvalidControllerException | MissingClassOrMethodException $e) {
             $annotation = null;
         }
 

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pgs\HashIdBundle\ParametersProcessor\Factory;
 
 use Pgs\HashIdBundle\Annotation\Hash;
 use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
+use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 
 class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactory
@@ -28,7 +31,13 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
         return $this->decodeParametersProcessor;
     }
 
-    public function createControllerDecodeParametersProcessor($controller, string $method)
+    /**
+     * @param object $controller
+     * @param string $method
+     *
+     * @return ParametersProcessorInterface
+     */
+    public function createControllerDecodeParametersProcessor($controller, string $method): ParametersProcessorInterface
     {
         try {
             /** @var Hash $annotation */
@@ -37,7 +46,7 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
                 $method,
                 Hash::class
             );
-        } catch (InvalidControllerException $e) {
+        } catch (InvalidControllerException | MissingClassOrMethodException $e) {
             $annotation = null;
         }
 
