@@ -5,7 +5,14 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/kjonski/HashId/badges/coverage.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kjonski/HashId/badges/quality-score.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
 
-Symfony 4 bundle for encoding integer route parameters and decoding request parameters with http://www.hashids.org/
+Symfony 4 bundle for encoding integer route parameters and decoding request parameters with <http://www.hashids.org/>  
+Replace predictable integer url parameters in easy way:
+  * `/hash-id/demo/decode/216/30` => `/hash-id/demo/decode/X46dBNxd79/30`
+  * `/order/315` => `/order/4w9aA11avM`  
+
+Pros:
+  * no need to use extra filters
+  * [Doctrine Converter](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html#doctrine-converter) compatible
 
 ## Instalation
 ```bash
