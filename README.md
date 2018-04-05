@@ -11,7 +11,7 @@ Replace predictable integer url parameters in easy way:
   * `/order/315` => `/order/4w9aA11avM`  
 
 Pros:
-  * no need to use extra filters
+  * no need to use extra filters - use `{{ url('route_name', {'id': 1}) }}` in twig template or `$this->generateUrl('route_name', ['id' => 1]);` in controller or service
   * [Doctrine Converter](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html#doctrine-converter) compatible
 
 ## Instalation
