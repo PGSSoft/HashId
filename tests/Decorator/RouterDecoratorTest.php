@@ -16,19 +16,19 @@ class RouterDecoratorTest extends WebTestCase
     /**
      * @var Container
      */
-    private $container;
+    protected static $container;
 
     protected function setUp()
     {
-        $this->container = static::createClient()->getContainer();
-        $this->router = $this->container->get('router');
+        $this::$container = static::createClient()->getContainer();
+        $this->router = self::$container->get('router');
     }
 
     public function testGenerateUrl(): void
     {
         $id = 10;
         $other = 20;
-        $alphabet = $this->container->getParameter('pgs_hash_id.alphabet');
+        $alphabet = self::$container->getParameter('pgs_hash_id.alphabet');
         $routeArgs = ['pgs_hash_id_demo_decode', ['id' => $id, 'other' => $other]];
         $generatedPath = $this->router->generate(...$routeArgs);
         $this->assertNotSame(sprintf('/hash-id/demo/decode/%d/%d', $id, $other), $generatedPath);
