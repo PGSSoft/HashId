@@ -33,9 +33,6 @@ class DecodeParametersProcessorFactory extends AbstractParametersProcessorFactor
 
     /**
      * @param object $controller
-     * @param string $method
-     *
-     * @return ParametersProcessorInterface
      */
     public function createControllerDecodeParametersProcessor($controller, string $method): ParametersProcessorInterface
     {

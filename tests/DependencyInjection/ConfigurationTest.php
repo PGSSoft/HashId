@@ -16,10 +16,7 @@ class ConfigurationTest extends TestCase
     }
 
     /**
-     * @dataProvider dataTestConfiguration
-     *
-     * @param array $inputConfig
-     * @param array $expectedConfig
+     * @dataProvider dataTestConfiguration*
      */
     public function testConfiguration(array $inputConfig, array $expectedConfig)
     {

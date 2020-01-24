@@ -3,7 +3,7 @@
 return PhpCsFixer\Config::create()
     ->setUsingCache(false)
     ->setRiskyAllowed(true)
-    ->setRules(array(
+    ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'dir_constant' => true,
@@ -16,4 +16,4 @@ return PhpCsFixer\Config::create()
         'simplified_null_return' => true,
         'strict_comparison' => true,
         'strict_param' => true,
-    ));
+    ]);

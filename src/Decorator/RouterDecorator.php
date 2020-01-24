@@ -38,10 +38,8 @@ class RouterDecorator implements RouterInterface
      * @throws RouteNotFoundException
      * @throws MissingMandatoryParametersException
      * @throws InvalidParameterException
-     *
-     * @return string
      */
-    public function generate($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH): string
+    public function generate($name, $parameters = [], $referenceType = RouterInterface::ABSOLUTE_PATH): string
     {
         $route = $this->getRouter()->getRouteCollection()->get($name);
         $this->processParameters($route, $parameters);

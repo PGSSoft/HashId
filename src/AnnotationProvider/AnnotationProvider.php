@@ -28,13 +28,7 @@ class AnnotationProvider implements AnnotationProviderInterface
     }
 
     /**
-     * @param string $controller
-     * @param string $annotationClassName
-     *
-     * @throws InvalidControllerException
-     * @throws MissingClassOrMethodException
-     *
-     * @return null|object
+     * @return object|null
      */
     public function getFromString(string $controller, string $annotationClassName)
     {
@@ -50,13 +44,11 @@ class AnnotationProvider implements AnnotationProviderInterface
 
     /**
      * @param object $controller
-     * @param string $method
-     * @param string $annotationClassName
      *
      * @throws InvalidControllerException
      * @throws MissingClassOrMethodException
      *
-     * @return null|object
+     * @return object|null
      */
     public function getFromObject($controller, string $method, string $annotationClassName)
     {

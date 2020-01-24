@@ -12,7 +12,7 @@ abstract class AbstractEventSubscriberTest extends TestCase
 {
     protected function subscribedEventsList(string $eventSubscriberClass): void
     {
-        $this->assertTrue(array_key_exists(KernelEvents::CONTROLLER, $eventSubscriberClass::getSubscribedEvents()));
+        $this->assertTrue(\array_key_exists(KernelEvents::CONTROLLER, $eventSubscriberClass::getSubscribedEvents()));
     }
 
     protected function getEventMock(): FilterControllerEvent
