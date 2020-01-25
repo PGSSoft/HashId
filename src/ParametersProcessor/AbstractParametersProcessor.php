@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Pgs\HashIdBundle\ParametersProcessor;
 
-use Hashids\HashidsInterface;
+use Pgs\HashIdBundle\ParametersProcessor\Converter\ConverterInterface;
 
 abstract class AbstractParametersProcessor implements ParametersProcessorInterface
 {
     protected $parametersToProcess = [];
 
     /**
-     * @var HashidsInterface
+     * @var ConverterInterface
      */
-    protected $hashIds;
+    protected $converter;
 
-    public function __construct(HashidsInterface $hashIds, array $parametersToProcess = [])
+    public function __construct(ConverterInterface $converter, array $parametersToProcess = [])
     {
-        $this->hashIds = $hashIds;
+        $this->converter = $converter;
         $this->parametersToProcess = $parametersToProcess;
     }
 
@@ -33,9 +33,9 @@ abstract class AbstractParametersProcessor implements ParametersProcessorInterfa
         return $this->parametersToProcess;
     }
 
-    public function getHashIds(): HashidsInterface
+    public function getConverter(): ConverterInterface
     {
-        return $this->hashIds;
+        return $this->converter;
     }
 
     public function process(array $parameters): array

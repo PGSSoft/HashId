@@ -20,6 +20,14 @@ services:
             - '%pgs_hash_id.min_hash_length%'
             - '%pgs_hash_id.alphabet%'
 
+    pgs_hash_id.converter.hashids:
+        class: Pgs\HashIdBundle\ParametersProcessor\Converter\HashidsConverter
+        arguments:
+            - "@pgs_hash_id.hashids"
+
+    pgs_hash_id.converter:
+        alias: "pgs_hash_id.converter.hashids"
+
     pgs_hash_id.decorator.router:
         class: '%pgs_hash_id.decorator.router.class%'
         public: false
@@ -37,13 +45,19 @@ services:
           - '@annotation_reader'
           - '@pgs_hash_id.reflection_provider'
 
+    pgs_hash_id.parameters_processor.abstract:
+        class: Pgs\HashIdBundle\ParametersProcessor\AbstractParametersProcessor
+        abstract: true
+        arguments:
+            - "@pgs_hash_id.converter"
+
     pgs_hash_id.parameters_processor.encode:
+        parent: pgs_hash_id.parameters_processor.abstract
         class: '%pgs_hash_id.parameters_processor.encode.class%'
-        arguments: ['@pgs_hash_id.hashids']
 
     pgs_hash_id.parameters_processor.decode:
+        parent: pgs_hash_id.parameters_processor.abstract
         class: '%pgs_hash_id.parameters_processor.decode.class%'
-        arguments: ['@pgs_hash_id.hashids']
 
     pgs_hash_id.parameters_processor.no_op:
         class: '%pgs_hash_id.parameters_processor.no_op.class%'

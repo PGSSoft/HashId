@@ -6,8 +6,6 @@ class Decode extends AbstractParametersProcessor
 {
     protected function processValue($value)
     {
-        $result = $this->getHashIds()->decode($value);
-
-        return $result[0] ?? $value;
+        return $this->getConverter()->decode($value);
     }
 }

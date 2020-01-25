@@ -6,6 +6,6 @@ class Encode extends AbstractParametersProcessor
 {
     protected function processValue($value): string
     {
-        return $this->getHashIds()->encode($value);
+        return $this->getConverter()->encode($value);
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Pgs\HashIdBundle\Tests\ParametersProcessor;
 
-use Hashids\HashidsInterface;
+use Pgs\HashIdBundle\ParametersProcessor\Converter\ConverterInterface;
 use Pgs\HashIdBundle\ParametersProcessor\Encode;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class EncodeTest extends TestCase
@@ -13,15 +14,18 @@ class EncodeTest extends TestCase
      */
     public function testEncode(array $parametersToEncode, array $routeParameters, array $expected)
     {
-        $encodeParametersProcessor = new Encode($this->getHashidMock(), $parametersToEncode);
+        $encodeParametersProcessor = new Encode($this->getConverterMock(), $parametersToEncode);
         $processedParameters = $encodeParametersProcessor->process($routeParameters);
         $this->assertSame($expected, $processedParameters);
         $this->assertSame(\count($parametersToEncode) > 0, $encodeParametersProcessor->needToProcess());
     }
 
-    protected function getHashidMock()
+    /**
+     * @return ConverterInterface|MockObject
+     */
+    protected function getConverterMock()
     {
-        $mock = $this->getMockBuilder(HashidsInterface::class)->setMethods(['encode'])->getMockForAbstractClass();
+        $mock = $this->getMockBuilder(ConverterInterface::class)->setMethods(['encode'])->getMockForAbstractClass();
         $mock
             ->method('encode')
             ->withAnyParameters()
