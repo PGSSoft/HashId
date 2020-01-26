@@ -9,7 +9,7 @@ use Hashids\HashidsInterface;
 class HashidsConverter implements ConverterInterface
 {
     /**
-     * @var HashidsInterface 
+     * @var HashidsInterface
      */
     private $hashids;
 
@@ -29,5 +29,4 @@ class HashidsConverter implements ConverterInterface
 
         return $result[0] ?? $value;
     }
-
 }

@@ -15,7 +15,7 @@ class PgsHashIdExtension extends Extension
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yaml');
 
@@ -23,7 +23,7 @@ class PgsHashIdExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config[Configuration::NODE_CONVERTER] as $converter => $parameters) {
-            foreach ($parameters as $parameter => $value){
+            foreach ($parameters as $parameter => $value) {
                 $container->setParameter(sprintf('pgs_hash_id.converter.%s.%s', $converter, $parameter), $value);
             }
         }
