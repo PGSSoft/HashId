@@ -28,7 +28,7 @@ class RouterDecoratorTest extends WebTestCase
     {
         $id = 10;
         $other = 20;
-        $alphabet = self::$container->getParameter('pgs_hash_id.alphabet');
+        $alphabet = self::$container->getParameter('pgs_hash_id.converter.hashids.alphabet');
         $routeArgs = ['pgs_hash_id_demo_decode', ['id' => $id, 'other' => $other]];
         $generatedPath = $this->router->generate(...$routeArgs);
         $this->assertNotSame(sprintf('/hash-id/demo/decode/%d/%d', $id, $other), $generatedPath);

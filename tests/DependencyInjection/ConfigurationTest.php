@@ -33,34 +33,60 @@ class ConfigurationTest extends TestCase
     public function dataTestConfiguration()
     {
         return [
-            [
-                [],
+            'default' => [
                 [
-                    Configuration::NODE_SALT => null,
-                    Configuration::NODE_MIN_HASH_LENGTH => 10,
-                    Configuration::NODE_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                    Configuration::NODE_CONVERTER => [
+                        Configuration::NODE_CONVERTER_HASHIDS => [
+
+                        ]
+                    ]
+                ],
+                [
+                    Configuration::NODE_CONVERTER => [
+                        Configuration::NODE_CONVERTER_HASHIDS => [
+                            Configuration::NODE_CONVERTER_HASHIDS_SALT => null,
+                            Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        ]
+                    ]
                 ],
             ],
-            [
+            'set salt' => [
                 [
-                    Configuration::NODE_SALT => 'test_salt',
+                    Configuration::NODE_CONVERTER => [
+                        Configuration::NODE_CONVERTER_HASHIDS => [
+                            Configuration::NODE_CONVERTER_HASHIDS_SALT => 'test_salt',
+                        ]
+                    ]
                 ],
                 [
-                    Configuration::NODE_SALT => 'test_salt',
-                    Configuration::NODE_MIN_HASH_LENGTH => 10,
-                    Configuration::NODE_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                    Configuration::NODE_CONVERTER => [
+                        Configuration::NODE_CONVERTER_HASHIDS => [
+                            Configuration::NODE_CONVERTER_HASHIDS_SALT => 'test_salt',
+                            Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        ]
+                    ]
                 ],
             ],
-            [
+            'set all' => [
                 [
-                    Configuration::NODE_SALT => 'test_salt',
-                    Configuration::NODE_MIN_HASH_LENGTH => 10,
-                    Configuration::NODE_ALPHABET => 'abcABC',
+                    Configuration::NODE_CONVERTER => [
+                        Configuration::NODE_CONVERTER_HASHIDS => [
+                            Configuration::NODE_CONVERTER_HASHIDS_SALT => 'test_salt',
+                            Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => 'abcABC',
+                        ]
+                    ]
                 ],
                 [
-                    Configuration::NODE_SALT => 'test_salt',
-                    Configuration::NODE_MIN_HASH_LENGTH => 10,
-                    Configuration::NODE_ALPHABET => 'abcABC',
+                    Configuration::NODE_CONVERTER => [
+                        Configuration::NODE_CONVERTER_HASHIDS => [
+                            Configuration::NODE_CONVERTER_HASHIDS_SALT => 'test_salt',
+                            Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => 'abcABC',
+                        ]
+                    ]
                 ],
             ],
         ];

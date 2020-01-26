@@ -14,8 +14,8 @@ class PgsHashIdExtensionTest extends TestCase
 
         $extension = new PgsHashIdExtension();
         $extension->load([], $container);
-        $this->assertTrue($container->hasParameter('pgs_hash_id.salt'));
-        $this->assertTrue($container->hasParameter('pgs_hash_id.min_hash_length'));
-        $this->assertTrue($container->hasParameter('pgs_hash_id.alphabet'));
+        $this->assertTrue($container->hasParameter('pgs_hash_id.converter.hashids.salt'));
+        $this->assertTrue($container->hasParameter('pgs_hash_id.converter.hashids.min_hash_length'));
+        $this->assertTrue($container->hasParameter('pgs_hash_id.converter.hashids.alphabet'));
     }
 }

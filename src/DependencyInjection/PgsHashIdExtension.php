@@ -15,15 +15,18 @@ class PgsHashIdExtension extends Extension
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__.'/../Resources/config')
+            new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('services.yaml');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('pgs_hash_id.salt', $config['salt']);
-        $container->setParameter('pgs_hash_id.min_hash_length', $config['min_hash_length']);
-        $container->setParameter('pgs_hash_id.alphabet', $config['alphabet']);
+
+        foreach ($config[Configuration::NODE_CONVERTER] as $converter => $parameters) {
+            foreach ($parameters as $parameter => $value){
+                $container->setParameter(sprintf('pgs_hash_id.converter.%s.%s', $converter, $parameter), $value);
+            }
+        }
 
         $this->registerAnnotation();
     }

@@ -16,9 +16,9 @@ services:
     pgs_hash_id.hashids:
         class: '%pgs_hash_id.hashids.class%'
         arguments:
-            - '%pgs_hash_id.salt%'
-            - '%pgs_hash_id.min_hash_length%'
-            - '%pgs_hash_id.alphabet%'
+            - '%pgs_hash_id.converter.hashids.salt%'
+            - '%pgs_hash_id.converter.hashids.min_hash_length%'
+            - '%pgs_hash_id.converter.hashids.alphabet%'
 
     pgs_hash_id.converter.hashids:
         class: Pgs\HashIdBundle\ParametersProcessor\Converter\HashidsConverter
