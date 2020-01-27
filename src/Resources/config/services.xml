@@ -5,7 +5,7 @@
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pgs_hash_id.hashids" class="Hashids\Hashids">
+        <service id="pgs_hash_id.hashids" class="Hashids\Hashids" public="false">
             <argument>%pgs_hash_id.converter.hashids.salt%</argument>
             <argument>%pgs_hash_id.converter.hashids.min_hash_length%</argument>
             <argument>%pgs_hash_id.converter.hashids.alphabet%</argument>
@@ -20,44 +20,57 @@
                  class="Pgs\HashIdBundle\Decorator\RouterDecorator"
                  public="false"
                  decorates="router">
-            <argument type="service" id="router"/>
+            <argument type="service" id="router.default"/>
             <argument type="service" id="pgs_hash_id.parameters_processor.factory.encode"/>
         </service>
-        <service id="pgs_hash_id.reflection_provider" class="Pgs\HashIdBundle\Reflection\ReflectionProvider"/>
-        <service id="pgs_hash_id.annotation_provider" class="Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider">
+        <service id="pgs_hash_id.reflection_provider"
+                 class="Pgs\HashIdBundle\Reflection\ReflectionProvider"
+                 public="false"/>
+        <service id="pgs_hash_id.annotation_provider"
+                 class="Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider"
+                 public="false">
             <argument type="service" id="annotation_reader"/>
             <argument type="service" id="pgs_hash_id.reflection_provider"/>
         </service>
         <service id="pgs_hash_id.parameters_processor.abstract"
                  class="Pgs\HashIdBundle\ParametersProcessor\AbstractParametersProcessor"
-                 abstract="true">
+                 abstract="true"
+                 public="false">
             <argument type="service" id="pgs_hash_id.converter"/>
         </service>
         <service id="pgs_hash_id.parameters_processor.encode"
                  class="Pgs\HashIdBundle\ParametersProcessor\Encode"
-                 parent="pgs_hash_id.parameters_processor.abstract"/>
+                 parent="pgs_hash_id.parameters_processor.abstract"
+                 public="false"/>
         <service id="pgs_hash_id.parameters_processor.decode"
                  class="Pgs\HashIdBundle\ParametersProcessor\Decode"
-                 parent="pgs_hash_id.parameters_processor.abstract"/>
-        <service id="pgs_hash_id.parameters_processor.no_op" class="Pgs\HashIdBundle\ParametersProcessor\NoOp"/>
+                 parent="pgs_hash_id.parameters_processor.abstract"
+                 public="false"/>
+        <service id="pgs_hash_id.parameters_processor.no_op"
+                 class="Pgs\HashIdBundle\ParametersProcessor\NoOp"
+                 public="false"/>
         <service id="pgs_hash_id.parameters_processor.factory.abstract"
                  class="Pgs\HashIdBundle\ParametersProcessor\Factory\AbstractParametersProcessorFactory"
-                 abstract="true">
+                 abstract="true"
+                 public="false">
             <argument type="service" id="pgs_hash_id.annotation_provider"/>
             <argument type="service" id="pgs_hash_id.parameters_processor.no_op"/>
         </service>
         <service id="pgs_hash_id.parameters_processor.factory.encode"
                  class="Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory"
-                 parent="pgs_hash_id.parameters_processor.factory.abstract">
+                 parent="pgs_hash_id.parameters_processor.factory.abstract"
+                 public="false">
             <argument type="service" id="pgs_hash_id.parameters_processor.encode"/>
         </service>
         <service id="pgs_hash_id.parameters_processor.factory.decode"
                  class="Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory"
-                 parent="pgs_hash_id.parameters_processor.factory.abstract">
+                 parent="pgs_hash_id.parameters_processor.factory.abstract"
+                 public="false">
             <argument type="service" id="pgs_hash_id.parameters_processor.decode"/>
         </service>
         <service id="pgs_hash_id.service.decode_controller_parameters"
-                 class="Pgs\HashIdBundle\Service\DecodeControllerParameters">
+                 class="Pgs\HashIdBundle\Service\DecodeControllerParameters"
+                 public="false">
             <argument type="service" id="pgs_hash_id.parameters_processor.factory.decode"/>
         </service>
         <service id="pgs_hash_id.event_subscriber.decode_controller_parameters"
