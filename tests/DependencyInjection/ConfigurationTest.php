@@ -45,7 +45,8 @@ class ConfigurationTest extends TestCase
                         Configuration::NODE_CONVERTER_HASHIDS => [
                             Configuration::NODE_CONVERTER_HASHIDS_SALT => null,
                             Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
-                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET =>
+                                'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         ],
                     ],
                 ],
@@ -63,7 +64,8 @@ class ConfigurationTest extends TestCase
                         Configuration::NODE_CONVERTER_HASHIDS => [
                             Configuration::NODE_CONVERTER_HASHIDS_SALT => 'test_salt',
                             Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
-                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET =>
+                                'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         ],
                     ],
                 ],
