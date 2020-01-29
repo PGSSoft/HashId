@@ -20,32 +20,43 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::ROOT_NAME);
-        $rootNode = $treeBuilder->getRootNode();
-        $converterNode = (new ArrayNodeDefinition(self::NODE_CONVERTER))->addDefaultsIfNotSet();
-        $rootNode->append($converterNode);
-
-        $this->addHashidsNode($converterNode);
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root(self::ROOT_NAME);
+        }
+        $rootNode
+            ->children()
+                ->arrayNode(self::NODE_CONVERTER)->addDefaultsIfNotSet()
+                    ->children()
+                        ->append($this->addHashidsConverterNode())
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }
 
-    private function addHashidsNode(ArrayNodeDefinition $node): void
+    private function addHashidsConverterNode(): ArrayNodeDefinition
     {
+        $node = new ArrayNodeDefinition(self::NODE_CONVERTER_HASHIDS);
+
         if (!class_exists(Hashids::class)) {
-            return;
+            return $node;
         }
 
-        $node
-            ->children()
-                ->arrayNode(self::NODE_CONVERTER_HASHIDS)->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode(self::NODE_CONVERTER_HASHIDS_SALT)->defaultNull()->end()
-                        ->scalarNode(self::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH)->defaultValue(10)->end()
-                        ->scalarNode(self::NODE_CONVERTER_HASHIDS_ALPHABET)
-                            ->defaultValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
-                        ->end()
+        return $node->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode(self::NODE_CONVERTER_HASHIDS_SALT)
+                        ->defaultNull()
                     ->end()
-                ->end()
-            ->end();
+                    ->scalarNode(self::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH)
+                        ->defaultValue(10)
+                    ->end()
+                    ->scalarNode(self::NODE_CONVERTER_HASHIDS_ALPHABET)
+                        ->defaultValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
+                    ->end()
+                ->end();
     }
 }
