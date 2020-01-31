@@ -15,9 +15,8 @@ class DemoController extends AbstractController
 {
     /**
      * @Route("/encode", requirements={"id"="\d+"})
-     * @param int $id
      *
-     * @return Response
+     * @param int $id
      */
     public function encode($id): Response
     {
