@@ -3,12 +3,22 @@
 namespace Pgs\HashIdBundle\Controller;
 
 use Pgs\HashIdBundle\Annotation\Hash;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class DemoController extends Controller
+/**
+ * @Route('/hash-id/demo')
+ */
+class DemoController extends AbstractController
 {
+    /**
+     * @Route("/encode", requirements={"id"="\d+"})
+     * @param int $id
+     *
+     * @return Response
+     */
     public function encode($id): Response
     {
         $other = 30;
@@ -29,6 +39,7 @@ EOT;
     }
 
     /**
+     * @Route("/decode/{id}/{other}")
      * @Hash("id")
      */
     public function decode(Request $request, int $id, int $other): Response
@@ -37,6 +48,7 @@ EOT;
     }
 
     /**
+     * @Route("/decode_more/{id}/{other}")
      * @Hash({"id", "other"})
      */
     public function decodeMore(Request $request, int $id, int $other): Response
