@@ -24,8 +24,9 @@ class Configuration implements ConfigurationInterface
             $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root(self::ROOT_NAME);
+            $rootNode = /* @scrutinizer ignore-deprecated */ $treeBuilder->root(self::ROOT_NAME);
         }
+
         $rootNode
             ->children()
                 ->arrayNode(self::NODE_CONVERTER)->addDefaultsIfNotSet()
@@ -46,11 +47,13 @@ class Configuration implements ConfigurationInterface
             return $node;
         }
 
-        return $node->addDefaultsIfNotSet()
+        return $node
+            ->addDefaultsIfNotSet()
                 ->children()
                     ->scalarNode(self::NODE_CONVERTER_HASHIDS_SALT)
                         ->defaultNull()
                     ->end()
+                    /* @scrutinizer ignore-call */
                     ->scalarNode(self::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH)
                         ->defaultValue(10)
                     ->end()

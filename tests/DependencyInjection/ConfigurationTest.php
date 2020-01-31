@@ -32,6 +32,8 @@ class ConfigurationTest extends TestCase
 
     public function dataTestConfiguration()
     {
+        $defaultAlphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+
         return [
             'default' => [
                 [
@@ -45,8 +47,7 @@ class ConfigurationTest extends TestCase
                         Configuration::NODE_CONVERTER_HASHIDS => [
                             Configuration::NODE_CONVERTER_HASHIDS_SALT => null,
                             Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
-                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET =>
-                                'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => $defaultAlphabet,
                         ],
                     ],
                 ],
@@ -64,8 +65,7 @@ class ConfigurationTest extends TestCase
                         Configuration::NODE_CONVERTER_HASHIDS => [
                             Configuration::NODE_CONVERTER_HASHIDS_SALT => 'test_salt',
                             Configuration::NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH => 10,
-                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET =>
-                                'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                            Configuration::NODE_CONVERTER_HASHIDS_ALPHABET => $defaultAlphabet,
                         ],
                     ],
                 ],
