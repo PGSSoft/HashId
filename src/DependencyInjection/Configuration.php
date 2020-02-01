@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode(self::NODE_CONVERTER)->addDefaultsIfNotSet()
+                ->arrayNode(self::NODE_CONVERTER)->addDefaultsIfNotSet()->ignoreExtraKeys(false)
                     ->children()
                         ->append($this->addHashidsConverterNode())
                     ->end()
@@ -43,7 +43,7 @@ class Configuration implements ConfigurationInterface
     {
         $node = new ArrayNodeDefinition(self::NODE_CONVERTER_HASHIDS);
 
-        if (!class_exists(Hashids::class)) {
+        if (!$this->doesHashidsExist()) {
             return $node;
         }
 
@@ -61,5 +61,10 @@ class Configuration implements ConfigurationInterface
                         ->defaultValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
                     ->end()
                 ->end();
+    }
+
+    private function doesHashidsExist()
+    {
+        return class_exists(Hashids::class);
     }
 }

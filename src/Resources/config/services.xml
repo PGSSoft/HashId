@@ -5,17 +5,6 @@
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="pgs_hash_id.hashids" class="Hashids\Hashids" public="false">
-            <argument>%pgs_hash_id.converter.hashids.salt%</argument>
-            <argument>%pgs_hash_id.converter.hashids.min_hash_length%</argument>
-            <argument>%pgs_hash_id.converter.hashids.alphabet%</argument>
-        </service>
-        <service id="pgs_hash_id.converter.hashids"
-                 class="Pgs\HashIdBundle\ParametersProcessor\Converter\HashidsConverter">
-            <argument type="service" id="pgs_hash_id.hashids"/>
-        </service>
-        <service id="pgs_hash_id.converter" alias="pgs_hash_id.converter.hashids"/>
-
         <service id="pgs_hash_id.decorator.router"
                  class="Pgs\HashIdBundle\Decorator\RouterDecorator"
                  public="false"
