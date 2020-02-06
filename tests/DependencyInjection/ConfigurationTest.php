@@ -136,15 +136,15 @@ class ConfigurationTest extends TestCase
                 [
                     Configuration::NODE_CONVERTER => [
                         'custom' => [
-                            'key' => 'foo'
-                        ]
+                            'key' => 'foo',
+                        ],
                     ],
                 ],
                 [
                     Configuration::NODE_CONVERTER => [
                         'custom' => [
-                            'key' => 'foo'
-                        ]
+                            'key' => 'foo',
+                        ],
                     ],
                 ],
             ],
