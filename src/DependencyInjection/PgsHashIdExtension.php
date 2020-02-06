@@ -15,7 +15,7 @@ class PgsHashIdExtension extends Extension
     {
         $loaderXml = new XmlFileLoader(
             $container,
-            new FileLocator(__DIR__.'/../Resources/config')
+            new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loaderXml->load('services.xml');
 

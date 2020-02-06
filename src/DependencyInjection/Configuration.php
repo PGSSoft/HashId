@@ -4,6 +4,7 @@ namespace Pgs\HashIdBundle\DependencyInjection;
 
 use Hashids\Hashids;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -20,12 +21,8 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::ROOT_NAME);
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $rootNode = /* @scrutinizer ignore-deprecated */ $treeBuilder->root(self::ROOT_NAME);
-        }
+        /** @var NodeDefinition|ArrayNodeDefinition $rootNode */
+        $rootNode = RootNodeFactory::create($treeBuilder, self::ROOT_NAME);
 
         $rootNode
             ->children()
@@ -43,7 +40,7 @@ class Configuration implements ConfigurationInterface
     {
         $node = new ArrayNodeDefinition(self::NODE_CONVERTER_HASHIDS);
 
-        if (!$this->doesHashidsExist()) {
+        if (!$this->supportsHashids()) {
             return $node;
         }
 
@@ -63,7 +60,7 @@ class Configuration implements ConfigurationInterface
                 ->end();
     }
 
-    private function doesHashidsExist()
+    public function supportsHashids()
     {
         return class_exists(Hashids::class);
     }
