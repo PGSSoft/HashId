@@ -55,7 +55,7 @@ class UserController extends Controller
 }
 ```
 
-You can also check our `DemoController`
+You can also check our [DemoController](src/Controller/DemoController.php).
 
 ## Contributing
 
