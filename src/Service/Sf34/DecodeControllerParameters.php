@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pgs\HashIdBundle\Service;
+namespace Pgs\HashIdBundle\Service\Sf34;
 
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Pgs\HashIdBundle\Service\AbstractDecodeControllerParameters;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 class DecodeControllerParameters extends AbstractDecodeControllerParameters
 {
-    public function decodeControllerParameters(ControllerEvent $event): void
+
+    public function decodeControllerParameters(FilterControllerEvent $event): void
     {
         $controller = $event->getController();
         $parametersProcessor = $this
