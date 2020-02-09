@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 class DecodeControllerParameters extends AbstractDecodeControllerParameters
 {
+
     public function decodeControllerParameters(FilterControllerEvent $event): void
     {
         $controller = $event->getController();

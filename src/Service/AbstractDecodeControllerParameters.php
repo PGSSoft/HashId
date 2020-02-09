@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Event\KernelEvent;
 
 abstract class AbstractDecodeControllerParameters
 {
+
     protected $parametersProcessorFactory;
     protected $paramConverterListener;
 
