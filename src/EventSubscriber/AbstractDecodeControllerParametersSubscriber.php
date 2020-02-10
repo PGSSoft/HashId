@@ -2,15 +2,16 @@
 
 namespace Pgs\HashIdBundle\EventSubscriber;
 
-use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-abstract class AbstractDecodeControllerParametersSubscriber implements EventSubscriberInterface
+abstract class AbstractDecodeControllerParametersSubscriber implements
+    EventSubscriberInterface,
+    DecodeControllerParametersSubscriberInterface
 {
     protected $decodeControllerParameters;
 
-    public function __construct(DecodeControllerParameters $decodeControllerParameters)
+    public function __construct(DecodeControllerParametersSubscriberInterface $decodeControllerParameters)
     {
         $this->decodeControllerParameters = $decodeControllerParameters;
     }
@@ -20,10 +21,5 @@ abstract class AbstractDecodeControllerParametersSubscriber implements EventSubs
         return [
             KernelEvents::CONTROLLER => 'onKernelController',
         ];
-    }
-
-    public function getDecodeControllerParameters(): DecodeControllerParameters
-    {
-        return $this->decodeControllerParameters;
     }
 }
