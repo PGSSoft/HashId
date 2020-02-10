@@ -9,12 +9,10 @@ class RootNodeFactory
 {
     public static function create(TreeBuilder $treeBuilder, string $nodeName): NodeDefinition
     {
-        if (self::isSymfonyConfigGt41($treeBuilder)) {
-            return $treeBuilder->getRootNode();
-        }
-
-        /* @scrutinizer ignore-deprecated */
-        return $treeBuilder->root($nodeName);
+        return self::isSymfonyConfigGt41($treeBuilder) ?
+            $treeBuilder->getRootNode() :
+            /* @scrutinizer ignore-deprecated */
+            $treeBuilder->root($nodeName);
     }
 
     public static function isSymfonyConfigGt41(TreeBuilder $treeBuilder)
