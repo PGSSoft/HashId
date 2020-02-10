@@ -3,7 +3,8 @@
 namespace Pgs\HashIdBundle\DependencyInjection\Compiler;
 
 use Pgs\HashIdBundle\EventSubscriber\DecodeControllerParametersSubscriber;
-use Pgs\HashIdBundle\EventSubscriber\Sf34\DecodeControllerParametersSubscriber as Sf34DecodeControllerParametersSubscriber;
+use Pgs\HashIdBundle\EventSubscriber\Sf34\DecodeControllerParametersSubscriber
+    as Sf34DecodeControllerParametersSubscriber;
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Pgs\HashIdBundle\Service\Sf34\DecodeControllerParameters as Sf34DecodeControllerParameters;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -39,20 +40,24 @@ class EventSubscriberCompilerPass implements CompilerPassInterface
             $eventSubscriberClass = DecodeControllerParametersSubscriber::class;
             $decodeControllerParametersClass = DecodeControllerParameters::class;
         }
-        $decodeControllerParametersServiceDefinition = new Definition($decodeControllerParametersClass, [
-            new Reference('pgs_hash_id.parameters_processor.factory.decode')
-        ]);
+        $decodeControllerParametersServiceDefinition = new Definition(
+            $decodeControllerParametersClass,
+            [
+                new Reference('pgs_hash_id.parameters_processor.factory.decode'),
+            ]
+        );
         $decodeControllerParametersServiceDefinition->setPublic(false);
 
         $eventSubscriberDefinition = new Definition(
             $eventSubscriberClass,
-            [new Reference('pgs_hash_id.service.decode_controller_parameters')]
+            [
+                new Reference('pgs_hash_id.service.decode_controller_parameters'),
+            ]
         );
         $eventSubscriberDefinition->addTag('kernel.event_subscriber');
         $container->addDefinitions([
             'pgs_hash_id.service.decode_controller_parameters' => $decodeControllerParametersServiceDefinition,
-            'pgs_hash_id.event_subscriber.decode_controller_parameters' => $eventSubscriberDefinition
+            'pgs_hash_id.event_subscriber.decode_controller_parameters' => $eventSubscriberDefinition,
         ]);
-
     }
 }
