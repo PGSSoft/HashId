@@ -4,7 +4,6 @@ namespace Pgs\HashIdBundle\DependencyInjection;
 
 use Hashids\Hashids;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -20,9 +19,8 @@ class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder(self::ROOT_NAME);
-        /** @var NodeDefinition|ArrayNodeDefinition $rootNode */
-        $rootNode = RootNodeFactory::create($treeBuilder, self::ROOT_NAME);
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root(self::ROOT_NAME);
 
         $rootNode
             ->children()
