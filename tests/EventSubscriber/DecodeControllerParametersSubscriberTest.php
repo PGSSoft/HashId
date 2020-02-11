@@ -14,10 +14,15 @@ class DecodeControllerParametersSubscriberTest extends AbstractEventSubscriberTe
 
     public function testOnKernelController(): void
     {
-        $subscriber = new DecodeControllerParametersSubscriber($this->createMock(DecodeControllerParameters::class));
+        $subscriber = new DecodeControllerParametersSubscriber($this->getDecodeControllerParametersMock());
         $event = $this->getEventMock();
         $encodedParameters = $event->getRequest()->attributes->all();
         $subscriber->onKernelController($event);
         $this->assertNotSame($encodedParameters, $event->getRequest()->attributes->all());
+    }
+
+    protected function getDecodeControllerParametersMock(): DecodeControllerParameters
+    {
+        return $this->createMock(DecodeControllerParameters::class);
     }
 }

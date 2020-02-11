@@ -4,7 +4,7 @@ namespace Pgs\HashIdBundle\EventSubscriber;
 
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class DecodeControllerParametersSubscriber implements EventSubscriberInterface
@@ -16,7 +16,7 @@ class DecodeControllerParametersSubscriber implements EventSubscriberInterface
         $this->decodeControllerParameters = $decodeControllerParameters;
     }
 
-    public function onKernelController(FilterControllerEvent $event): void
+    public function onKernelController(ControllerEvent $event): void
     {
         $this->getDecodeControllerParameters()->decodeControllerParameters($event);
     }

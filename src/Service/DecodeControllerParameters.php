@@ -7,7 +7,7 @@ namespace Pgs\HashIdBundle\Service;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class DecodeControllerParameters
 {
@@ -20,7 +20,7 @@ class DecodeControllerParameters
         $this->parametersProcessorFactory = $parametersProcessorFactory;
     }
 
-    public function decodeControllerParameters(FilterControllerEvent $event): void
+    public function decodeControllerParameters(ControllerEvent $event): void
     {
         $controller = $event->getController();
         $parametersProcessor = $this
@@ -32,7 +32,7 @@ class DecodeControllerParameters
     }
 
     protected function processRequestParameters(
-        FilterControllerEvent $event,
+        ControllerEvent $event,
         ParametersProcessorInterface $parametersProcessor
     ): void {
         if ($parametersProcessor->needToProcess()) {
@@ -42,7 +42,7 @@ class DecodeControllerParameters
         }
     }
 
-    protected function processRequestParametersWithParamConverter(FilterControllerEvent $event): void
+    protected function processRequestParametersWithParamConverter(ControllerEvent $event): void
     {
         if (null !== $this->getParamConverterListener()) {
             $this->getParamConverterListener()->onKernelController($event);

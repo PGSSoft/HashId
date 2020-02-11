@@ -2,10 +2,11 @@
 
 namespace Pgs\HashIdBundle\Tests\EventSubscriber;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 abstract class AbstractEventSubscriberTest extends TestCase
@@ -15,9 +16,12 @@ abstract class AbstractEventSubscriberTest extends TestCase
         $this->assertTrue(\array_key_exists(KernelEvents::CONTROLLER, $eventSubscriberClass::getSubscribedEvents()));
     }
 
-    protected function getEventMock(): FilterControllerEvent
+    /**
+     * @return ControllerEvent|MockObject
+     */
+    protected function getEventMock(): ControllerEvent
     {
-        $mock = $this->getMockBuilder(FilterControllerEvent::class)
+        $mock = $this->getMockBuilder(ControllerEvent::class)
             ->disableOriginalConstructor()
             ->setMethods(['getRequest'])
             ->getMock();
@@ -27,6 +31,9 @@ abstract class AbstractEventSubscriberTest extends TestCase
         return $mock;
     }
 
+    /**
+     * @return Request|MockObject
+     */
     protected function getRequestMock(): Request
     {
         $mock = $this->getMockBuilder(Request::class)
