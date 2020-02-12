@@ -1,6 +1,6 @@
 # [![PGS Software](https://www.pgs-soft.com/pgssoft-logo.png)](https://www.pgs-soft.com) / HashId
 
-[!PHP from Packagist](https://img.shields.io/packagist/php-v/symfony/symfony.svg)
+![PHP from Packagist](https://img.shields.io/packagist/php-v/symfony/symfony.svg)
 [![Build Status](https://travis-ci.org/kjonski/HashId.svg?branch=3.0)](https://travis-ci.org/kjonski/HashId)
 [![Code Coverage](https://scrutinizer-ci.com/g/kjonski/HashId/badges/coverage.png?b=3.0)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kjonski/HashId/badges/quality-score.png?b=3.0)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
