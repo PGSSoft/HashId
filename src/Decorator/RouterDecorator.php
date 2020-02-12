@@ -28,13 +28,11 @@ class RouterDecorator implements RouterInterface, WarmableInterface
         return $this->object;
     }
 
-    /**
-     * @param string $name
-     * @param array  $parameters
-     * @param int    $referenceType
-     */
-    public function generate($name, $parameters = [], $referenceType = RouterInterface::ABSOLUTE_PATH): string
-    {
+    public function generate(
+        string $name,
+        array $parameters = [],
+        int $referenceType = RouterInterface::ABSOLUTE_PATH
+    ): string {
         $route = $this->getRouter()->getRouteCollection()->get($name);
         $this->processParameters($route, $parameters);
 
@@ -78,7 +76,7 @@ class RouterDecorator implements RouterInterface, WarmableInterface
     /**
      * @codeCoverageIgnore
      */
-    public function match($pathinfo)
+    public function match(string $pathinfo)
     {
         return $this->getRouter()->match($pathinfo);
     }
