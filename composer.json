@@ -13,9 +13,10 @@
     "require": {
         "php": "^7.1.3",
         "symfony/dependency-injection": "^4.1.12|^5.0",
-        "symfony/config": "~4.4|~5.0",
+        "symfony/config": "^4.4|~5.0",
         "doctrine/annotations": "^1.6",
-        "hashids/hashids": ">=2.0"
+        "hashids/hashids": ">=2.0",
+        "symfony/routing": "^4.4|^5.0"
     },
     "autoload": {
         "psr-4": { "Pgs\\HashIdBundle\\": "src/" }
