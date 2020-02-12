@@ -2,8 +2,8 @@
 
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/symfony/symfony.svg)
 [![Build Status](https://travis-ci.org/kjonski/HashId.svg?branch=3.0)](https://travis-ci.org/kjonski/HashId)
-[![Code Coverage](https://scrutinizer-ci.com/g/kjonski/HashId/badges/coverage.png?b=3.0)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kjonski/HashId/badges/quality-score.png?b=3.0)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
+[![Code Coverage](https://scrutinizer-ci.com/g/kjonski/HashId/badges/coverage.png?b=3.0)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=3.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kjonski/HashId/badges/quality-score.png?b=3.0)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=3.0)
 
 Symfony 3.4/4/5 bundle for encoding integer route parameters and decoding request parameters with <http://www.hashids.org/>  
 Replace predictable integer url parameters in easy way:
