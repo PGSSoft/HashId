@@ -7,9 +7,6 @@ namespace Pgs\HashIdBundle\Decorator;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
-use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -32,15 +29,12 @@ class RouterDecorator implements RouterInterface, WarmableInterface
     }
 
     /**
-     * @throws RouteNotFoundException
-     * @throws MissingMandatoryParametersException
-     * @throws InvalidParameterException
+     * @param string $name
+     * @param array  $parameters
+     * @param int    $referenceType
      */
-    public function generate(
-        string $name,
-        array $parameters = [],
-        int $referenceType = RouterInterface::ABSOLUTE_PATH
-    ): string {
+    public function generate($name, $parameters = [], $referenceType = RouterInterface::ABSOLUTE_PATH): string
+    {
         $route = $this->getRouter()->getRouteCollection()->get($name);
         $this->processParameters($route, $parameters);
 
@@ -84,7 +78,7 @@ class RouterDecorator implements RouterInterface, WarmableInterface
     /**
      * @codeCoverageIgnore
      */
-    public function match(string $pathinfo)
+    public function match($pathinfo)
     {
         return $this->getRouter()->match($pathinfo);
     }
