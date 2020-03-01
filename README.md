@@ -1,11 +1,14 @@
 # [![PGS Software](https://www.pgs-soft.com/pgssoft-logo.png)](https://www.pgs-soft.com) / HashId
 
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/symfony/symfony.svg)
-[![Build Status](https://travis-ci.org/kjonski/HashId.svg?branch=dev-master)](https://travis-ci.org/kjonski/HashId)
-[![Code Coverage](https://scrutinizer-ci.com/g/kjonski/HashId/badges/coverage.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kjonski/HashId/badges/quality-score.png?b=dev-master)](https://scrutinizer-ci.com/g/kjonski/HashId/?branch=dev-master)
+[![Build Status](https://travis-ci.org/PGSSoft/HashId.svg?branch=1.0)](https://travis-ci.org/PGSSoft/HashId)
+[![Code Coverage](https://scrutinizer-ci.com/g/PGSSoft/HashId/badges/coverage.png?b=1.0)](https://scrutinizer-ci.com/g/PGSSoft/HashId/?branch=1.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/PGSSoft/HashId/badges/quality-score.png?b=1.0)](https://scrutinizer-ci.com/g/PGSSoft/HashId/?branch=1.0)
 
-Symfony 4 bundle for encoding integer route parameters and decoding request parameters with <http://www.hashids.org/>  
+Symfony bundle for encoding integer route parameters and decoding request parameters with <http://www.hashids.org/>
+***
+Please use this version with Symfony &ge;3.4 and <4.3
+***
 Replace predictable integer url parameters in easy way:
   * `/hash-id/demo/decode/216/30` => `/hash-id/demo/decode/X46dBNxd79/30`
   * `/order/315` => `/order/4w9aA11avM`  
