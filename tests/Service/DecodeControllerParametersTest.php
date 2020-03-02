@@ -7,11 +7,12 @@ use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactor
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
 use Pgs\HashIdBundle\Tests\ParametersProcessor\ParametersProcessorMockProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class DecodeControllerParametersTest extends TestCase
 {
@@ -74,6 +75,9 @@ class DecodeControllerParametersTest extends TestCase
         $this->assertSame(10, $event->getRequest()->attributes->all()['id']);
     }
 
+    /**
+     * @return DecodeParametersProcessorFactory|MockObject
+     */
     protected function getDecodeParametersProcessorFactoryMock(): DecodeParametersProcessorFactory
     {
         $mock = $this->getMockBuilder(DecodeParametersProcessorFactory::class)
@@ -95,9 +99,12 @@ class DecodeControllerParametersTest extends TestCase
         return $mock;
     }
 
-    protected function getEventMock(array $requestConsecutiveCalls): FilterControllerEvent
+    /**
+     * @return ControllerEvent|MockObject
+     */
+    protected function getEventMock(array $requestConsecutiveCalls): ControllerEvent
     {
-        $mock = $this->getMockBuilder(FilterControllerEvent::class)
+        $mock = $this->getMockBuilder(ControllerEvent::class)
             ->disableOriginalConstructor()
             ->setMethods(['getController', 'getRequest'])
             ->getMock();
@@ -111,6 +118,9 @@ class DecodeControllerParametersTest extends TestCase
         return $mock;
     }
 
+    /**
+     * @return Request|MockObject
+     */
     protected function getRequestMock(array $consecutiveCalls): Request
     {
         $mock = $this->getMockBuilder(Request::class)
@@ -122,6 +132,9 @@ class DecodeControllerParametersTest extends TestCase
         return $mock;
     }
 
+    /**
+     * @return ParamConverterListener|MockObject
+     */
     protected function getDoctrineParamConverterListenerMock(): ParamConverterListener
     {
         $mock = $this->getMockBuilder(ParamConverterListener::class)
