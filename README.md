@@ -27,9 +27,11 @@ composer require pgs-soft/hashid-bundle
 # config/packages/pgs_hash_id.yaml
 
 pgs_hash_id:
-    salt: 'my super salt'
-    min_hash_length: 20
-    alphabet: 'qwertyasdzxc098765-'
+  converter:
+    hashids:
+      salt: 'my super salt'
+      min_hash_length: 20
+      alphabet: 'qwertyasdzxc098765-'
 ```
 
 ## Controller configuration
