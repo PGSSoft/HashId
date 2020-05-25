@@ -23,9 +23,19 @@ class DecodeControllerParameters
     public function decodeControllerParameters(FilterControllerEvent $event): void
     {
         $controller = $event->getController();
+        if (\is_array($controller)) {
+            list($controllerObject, $method) = $controller;
+        } elseif (\is_object($controller) && !$controller instanceof \Closure) {
+            $controllerObject = $controller;
+            $method = '__invoke';
+        } else {
+            //Controller is a closure
+            return;
+        }
+
         $parametersProcessor = $this
             ->getParametersProcessorFactory()
-            ->createControllerDecodeParametersProcessor(...$controller);
+            ->createControllerDecodeParametersProcessor($controllerObject, $method);
 
         $this->processRequestParameters($event, $parametersProcessor);
         $this->processRequestParametersWithParamConverter($event);
