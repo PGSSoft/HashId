@@ -45,7 +45,13 @@ class RouterDecoratorTest extends WebTestCase
 
         $routeArgs = ['pgs_hash_id_demo_decode_more', ['id' => $id, 'other' => $other]];
         $generatedPath = $this->router->generate(...$routeArgs);
-        $pattern = sprintf('/\/hash-id\/demo\/decode_more\/[%s]{%d}\/[%s]{%d}/', $alphabet, $hashLength, $alphabet, $hashLength);
+        $pattern = sprintf(
+            '/\/hash-id\/demo\/decode_more\/[%s]{%d}\/[%s]{%d}/',
+            $alphabet,
+            $hashLength,
+            $alphabet,
+            $hashLength
+        );
         $this->assertRegExp($pattern, $generatedPath);
     }
 }
