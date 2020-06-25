@@ -55,6 +55,29 @@ EOT;
         return new Response($this->getDecodeResponse($request, $id, $other));
     }
 
+    /**
+     * @Hash("id")
+     *
+     * @param int $id
+     */
+    public function encodeLocalized($id): Response
+    {
+        $url1 = $this->generateUrl('pgs_hash_id_demo_encode_localized', ['id' => $id, '_locale' => 'pl']);
+        $url2 = $this->generateUrl('pgs_hash_id_demo_encode_localized', ['id' => $id]);
+
+        $response = <<<EOT
+            <html>
+                <body>
+                Provided id: $id<br />
+                Localized url with encoded parameter and locale provided: <a href="$url1">$url1</a><br />
+                Localized url with encoded parameter: <a href="$url2">$url2</a><br />
+                </body>
+            </html>
+EOT;
+
+        return new Response($response);
+    }
+
     private function getDecodeResponse(Request $request, int $id, int $other): string
     {
         $providedId = $this->getRouteParam($request, 'id');

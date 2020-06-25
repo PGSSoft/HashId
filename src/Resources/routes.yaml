@@ -11,3 +11,9 @@ pgs_hash_id_demo_decode:
 pgs_hash_id_demo_decode_more:
     path: /hash-id/demo/decode_more/{id}/{other}
     controller: Pgs\HashIdBundle\Controller\DemoController::decodeMore
+
+pgs_hash_id_demo_encode_localized:
+    path:
+        en: /hash-id/demo/encode-en/{id}
+        pl: /hash-id/demo/encode-pl/{id}
+    controller: Pgs\HashIdBundle\Controller\DemoController::encodeLocalized
