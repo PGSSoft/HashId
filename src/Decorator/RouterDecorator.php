@@ -6,9 +6,6 @@ namespace Pgs\HashIdBundle\Decorator;
 
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
-use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -30,21 +27,27 @@ class RouterDecorator implements RouterInterface
         return $this->object;
     }
 
-    /**
-     * @param string $name
-     * @param array  $parameters
-     * @param int    $referenceType
-     *
-     * @throws RouteNotFoundException
-     * @throws MissingMandatoryParametersException
-     * @throws InvalidParameterException
-     */
-    public function generate($name, $parameters = [], $referenceType = RouterInterface::ABSOLUTE_PATH): string
-    {
-        $route = $this->getRouter()->getRouteCollection()->get($name);
-        $this->processParameters($route, $parameters);
+    public function generate(
+        $name,
+        $parameters = [],
+        $referenceType = RouterInterface::ABSOLUTE_PATH
+    ): string {
+        $this->processParameters($this->getRoute($name, $parameters), $parameters);
 
         return $this->getRouter()->generate($name, $parameters, $referenceType);
+    }
+
+    private function getRoute(string $name, array $parameters): ?Route
+    {
+        $routeCollection = $this->getRouter()->getRouteCollection();
+        $route = $routeCollection->get($name);
+
+        if (null === $route) {
+            $locale = $parameters['_locale'] ?? $this->getRouter()->getContext()->getParameter('_locale');
+            $route = $routeCollection->get(sprintf('%s.%s', $name, $locale));
+        }
+
+        return $route;
     }
 
     private function processParameters(?Route $route, array &$parameters): void
