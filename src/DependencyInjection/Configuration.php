@@ -17,6 +17,9 @@ class Configuration implements ConfigurationInterface
     const NODE_CONVERTER_HASHIDS_MIN_HASH_LENGTH = 'min_hash_length';
     const NODE_CONVERTER_HASHIDS_ALPHABET = 'alphabet';
 
+    const NODE_CONVERTER_TINY = 'tiny';
+    const NODE_CONVERTER_TINY_SET = 'set';
+
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::ROOT_NAME);
@@ -27,6 +30,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode(self::NODE_CONVERTER)->addDefaultsIfNotSet()->ignoreExtraKeys(false)
                     ->children()
                         ->append($this->addHashidsConverterNode())
+                        ->append($this->addTinyConverterNode())
                     ->end()
                 ->end()
             ->end();
@@ -60,6 +64,29 @@ class Configuration implements ConfigurationInterface
 
     public function supportsHashids()
     {
+        return class_exists(Hashids::class);
+    }
+
+    private function addTinyConverterNode(): ArrayNodeDefinition
+    {
+        $node = new ArrayNodeDefinition(self::NODE_CONVERTER_TINY);
+
+        if (!$this->supportsTiny()) {
+            return $node;
+        }
+
+        return $node
+            ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode(self::NODE_CONVERTER_TINY_SET)
+                        ->defaultValue('5SX0TEjkR1mLOw8Gvq2VyJxIFhgCAYidrclDWaM3so9bfzZpuUenKtP74QNH6B')
+                    ->end()
+                ->end();
+    }
+
+    public function supportsTiny()
+    {
+        return false;
         return class_exists(Hashids::class);
     }
 }
