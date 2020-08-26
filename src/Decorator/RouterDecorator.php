@@ -6,9 +6,11 @@ namespace Pgs\HashIdBundle\Decorator;
 
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
 class RouterDecorator implements RouterInterface, WarmableInterface
@@ -17,15 +19,29 @@ class RouterDecorator implements RouterInterface, WarmableInterface
 
     protected $parametersProcessorFactory;
 
-    public function __construct(RouterInterface $router, EncodeParametersProcessorFactory $parametersProcessorFactory)
-    {
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    public function __construct(
+        RouterInterface $router,
+        EncodeParametersProcessorFactory $parametersProcessorFactory,
+        LoggerInterface $logger
+    ) {
         $this->object = $router;
         $this->parametersProcessorFactory = $parametersProcessorFactory;
+        $this->logger = $logger;
     }
 
     public function getRouter(): RouterInterface
     {
         return $this->object;
+    }
+
+    protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
     }
 
     public function generate(
@@ -44,8 +60,24 @@ class RouterDecorator implements RouterInterface, WarmableInterface
         $route = $routeCollection->get($name);
 
         if (null === $route) {
-            $locale = $parameters['_locale'] ?? $this->getRouter()->getContext()->getParameter('_locale');
-            $route = $routeCollection->get(sprintf('%s.%s', $name, $locale));
+            $route = $this->getLocalizedRoute($routeCollection, $name, $parameters);
+        } else {
+            $this->getLogger()->info(sprintf('Found unlocalized route for "%s" name', $name));
+        }
+
+        return $route;
+    }
+
+    private function getLocalizedRoute(RouteCollection $routeCollection, string $name, array $parameters): ?Route
+    {
+        $locale = $parameters['_locale'] ?? $this->getRouter()->getContext()->getParameter('_locale');
+        $this->getLogger()->info(
+            sprintf('Unlocalized route for "%s" not found, looking for route with "%s" locale', $name, $locale)
+        );
+        $route = $routeCollection->get(sprintf('%s.%s', $name, $locale));
+
+        if (null !== $route) {
+            $this->getLogger()->info(sprintf('Found localized route for "%s" name and "%s" locale', $name, $locale));
         }
 
         return $route;

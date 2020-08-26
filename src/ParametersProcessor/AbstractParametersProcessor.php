@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pgs\HashIdBundle\ParametersProcessor;
 
 use Pgs\HashIdBundle\ParametersProcessor\Converter\ConverterInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractParametersProcessor implements ParametersProcessorInterface
 {
@@ -15,9 +16,18 @@ abstract class AbstractParametersProcessor implements ParametersProcessorInterfa
      */
     protected $converter;
 
-    public function __construct(ConverterInterface $converter, array $parametersToProcess = [])
-    {
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    public function __construct(
+        ConverterInterface $converter,
+        LoggerInterface $logger,
+        array $parametersToProcess = []
+    ) {
         $this->converter = $converter;
+        $this->logger = $logger;
         $this->parametersToProcess = $parametersToProcess;
     }
 
@@ -38,11 +48,23 @@ abstract class AbstractParametersProcessor implements ParametersProcessorInterfa
         return $this->converter;
     }
 
+    protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
+    }
+
     public function process(array $parameters): array
     {
+        $this->getLogger()->info(
+            sprintf('Attempt to process "%s" parameters', implode(',', $this->getParametersToProcess()))
+        );
         foreach ($this->getParametersToProcess() as $parameter) {
             if (isset($parameters[$parameter])) {
-                $parameters[$parameter] = $this->processValue($parameters[$parameter]);
+                $processedValue = $this->processValue($parameters[$parameter]);
+                $this->getLogger()->info(
+                    sprintf('Processing "%s" parameter: %s => %s', $parameter, $parameters[$parameter], $processedValue)
+                );
+                $parameters[$parameter] = $processedValue;
             }
         }
 

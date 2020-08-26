@@ -7,6 +7,7 @@ use Pgs\HashIdBundle\ParametersProcessor\Decode;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class DecodeTest extends TestCase
 {
@@ -15,14 +16,14 @@ class DecodeTest extends TestCase
      */
     public function testDecode(array $parametersToDecode, array $routeParameters, array $expected)
     {
-        $decodeParametersProcessor = new Decode($this->getConverterMock(), $parametersToDecode);
+        $decodeParametersProcessor = new Decode($this->getConverterMock(), $this->getLoggerMock(), $parametersToDecode);
         $processedParameters = $decodeParametersProcessor->process($routeParameters);
         $this->assertSame($expected, $processedParameters);
     }
 
     public function testSetParametersToProcess()
     {
-        $decodeParametersProcessor = new Decode($this->getConverterMock(), []);
+        $decodeParametersProcessor = new Decode($this->getConverterMock(), $this->getLoggerMock(), []);
         $parametersToProcess = ['param1', 'param2'];
         $result = $decodeParametersProcessor->setParametersToProcess($parametersToProcess);
         $this->assertTrue($result instanceof ParametersProcessorInterface);
@@ -41,6 +42,14 @@ class DecodeTest extends TestCase
             ->willReturn(10);
 
         return $mock;
+    }
+
+    /**
+     * @return LoggerInterface|MockObject
+     */
+    protected function getLoggerMock()
+    {
+        return $this->getMockForAbstractClass(LoggerInterface::class);
     }
 
     public function decodeParametersDataProvider()

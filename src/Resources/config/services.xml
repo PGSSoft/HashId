@@ -5,12 +5,16 @@
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="pgs_hash_id.logger"
+                 class="Symfony\Component\HttpKernel\Log\Logger"/>
+
         <service id="pgs_hash_id.decorator.router"
                  class="Pgs\HashIdBundle\Decorator\RouterDecorator"
                  public="false"
                  decorates="router">
             <argument type="service" id="router.default"/>
             <argument type="service" id="pgs_hash_id.parameters_processor.factory.encode"/>
+            <argument type="service" id="pgs_hash_id.logger"/>
         </service>
         <service id="pgs_hash_id.reflection_provider"
                  class="Pgs\HashIdBundle\Reflection\ReflectionProvider"
@@ -26,6 +30,7 @@
                  abstract="true"
                  public="false">
             <argument type="service" id="pgs_hash_id.converter"/>
+            <argument type="service" id="pgs_hash_id.logger"/>
         </service>
         <service id="pgs_hash_id.parameters_processor.encode"
                  class="Pgs\HashIdBundle\ParametersProcessor\Encode"

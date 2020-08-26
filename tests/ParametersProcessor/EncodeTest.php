@@ -6,6 +6,7 @@ use Pgs\HashIdBundle\ParametersProcessor\Converter\ConverterInterface;
 use Pgs\HashIdBundle\ParametersProcessor\Encode;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class EncodeTest extends TestCase
 {
@@ -14,7 +15,7 @@ class EncodeTest extends TestCase
      */
     public function testEncode(array $parametersToEncode, array $routeParameters, array $expected)
     {
-        $encodeParametersProcessor = new Encode($this->getConverterMock(), $parametersToEncode);
+        $encodeParametersProcessor = new Encode($this->getConverterMock(), $this->getLoggerMock(), $parametersToEncode);
         $processedParameters = $encodeParametersProcessor->process($routeParameters);
         $this->assertSame($expected, $processedParameters);
         $this->assertSame(\count($parametersToEncode) > 0, $encodeParametersProcessor->needToProcess());
@@ -32,6 +33,14 @@ class EncodeTest extends TestCase
             ->willReturn('encoded');
 
         return $mock;
+    }
+
+    /**
+     * @return LoggerInterface|MockObject
+     */
+    protected function getLoggerMock()
+    {
+        return $this->getMockForAbstractClass(LoggerInterface::class);
     }
 
     public function encodeParametersDataProvider()
