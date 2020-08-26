@@ -6,6 +6,7 @@ use Hashids\Hashids;
 use Pgs\HashIdBundle\ParametersProcessor\Converter\TinyConverter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use ZackKitzmiller\Tiny;
 
 class TinyConverterCompilerPass extends AbstractConverterCompilerPass
 {
@@ -26,7 +27,7 @@ class TinyConverterCompilerPass extends AbstractConverterCompilerPass
 
     protected function getSupportedClass(): string
     {
-//        return Tiny::class;
+        return Tiny::class;
     }
 
     protected function getConverterClass(): string

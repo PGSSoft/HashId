@@ -107,9 +107,10 @@ class ConfigurationTest extends TestCase
         /** @var Configuration|MockObject $configuration */
         $configuration = $this
             ->getMockBuilder(Configuration::class)
-            ->setMethods(['supportsHashids'])
+            ->setMethods(['supportsHashids', 'supportsTiny'])
             ->getMock();
         $configuration->method('supportsHashids')->willReturn(false);
+        $configuration->method('supportsTiny')->willReturn(false);
 
         $node = $configuration->getConfigTreeBuilder()
             ->buildTree();

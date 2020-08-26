@@ -6,6 +6,7 @@ use Hashids\Hashids;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use ZackKitzmiller\Tiny;
 
 class Configuration implements ConfigurationInterface
 {
@@ -86,7 +87,6 @@ class Configuration implements ConfigurationInterface
 
     public function supportsTiny()
     {
-        return false;
-        return class_exists(Hashids::class);
+        return class_exists(Tiny::class);
     }
 }
