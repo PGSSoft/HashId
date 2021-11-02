@@ -10,8 +10,9 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 
-class RouterDecorator implements RouterInterface, WarmableInterface
+class RouterDecorator implements RouterInterface, WarmableInterface, RequestMatcherInterface
 {
     use DecoratorTrait;
 
@@ -102,4 +103,13 @@ class RouterDecorator implements RouterInterface, WarmableInterface
             $this->getRouter()->warmUp($cacheDir);
         }
     }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function matchRequest($pathinfo)
+    {
+        return $this->getRouter()->matchRequest($pathinfo);
+    }
+
 }
