@@ -111,5 +111,4 @@ class RouterDecorator implements RouterInterface, WarmableInterface, RequestMatc
     {
         return $this->getRouter()->matchRequest($pathinfo);
     }
-
 }
