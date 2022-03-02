@@ -14,7 +14,7 @@ class NoOpTest extends TestCase
      */
     protected $parametersProcessor;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->parametersProcessor = new NoOp($this->getHashidMock(), []);
     }

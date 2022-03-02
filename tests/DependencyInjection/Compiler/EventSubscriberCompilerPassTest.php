@@ -30,7 +30,7 @@ class EventSubscriberCompilerPassTest extends TestCase
      */
     private $decodeControllerParametersDefinition;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->pass = new EventSubscriberCompilerPass();
         $this->container = new ContainerBuilder();
