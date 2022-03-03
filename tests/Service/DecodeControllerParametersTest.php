@@ -6,6 +6,7 @@ use Pgs\HashIdBundle\ParametersProcessor\Decode;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
+use Pgs\HashIdBundle\Tests\Controller\ParamsAnnotatedController;
 use Pgs\HashIdBundle\Tests\ParametersProcessor\ParametersProcessorMockProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -64,8 +65,9 @@ class DecodeControllerParametersTest extends TestCase
 
     public function decodeControllerParametersDataProvider()
     {
+        $controller = new ParamsAnnotatedController();
         return [
-            ['controller as array' => fn() => null, 'demo'],
+            ['controller' => $controller, 'demo'],
         ];
     }
 
