@@ -1,5 +1,5 @@
 {
-    "name": "pgs-soft/hashid-bundle",
+    "name": "eductradesa/hashid-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Hash Id",
     "keywords": [],
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^8.1.0",
+        "php": "^8.0.0",
         "symfony/dependency-injection": "^5.4|^6.0",
         "symfony/config": "~5.0|~6.0",
         "doctrine/annotations": "^1.11",
