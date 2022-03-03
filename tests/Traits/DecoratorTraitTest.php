@@ -10,7 +10,7 @@ class DecoratorTraitTest extends TestCase
 {
     protected $decorateClass;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $baseClass = new BaseTestClass();
         $this->decorateClass = new DecorateTestClass($baseClass);

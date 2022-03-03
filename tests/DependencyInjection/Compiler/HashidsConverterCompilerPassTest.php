@@ -20,7 +20,7 @@ class HashidsConverterCompilerPassTest extends TestCase
      */
     private $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->compilerPass = new HashidsConverterCompilerPass();
 
