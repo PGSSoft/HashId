@@ -6,6 +6,7 @@ use Pgs\HashIdBundle\ParametersProcessor\Decode;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\DecodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Service\DecodeControllerParameters;
 use Pgs\HashIdBundle\Tests\Controller\ControllerMockProvider;
+use Pgs\HashIdBundle\Tests\Controller\ParamsAnnotatedController;
 use Pgs\HashIdBundle\Tests\ParametersProcessor\ParametersProcessorMockProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -13,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class DecodeControllerParametersTest extends TestCase
 {
@@ -20,15 +22,14 @@ class DecodeControllerParametersTest extends TestCase
 
     protected $parametersProcessorMockProvider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        $this->controllerMockProvider = new ControllerMockProvider();
         $this->parametersProcessorMockProvider = new ParametersProcessorMockProvider();
     }
 
     public function getControllerMockProvider(): ControllerMockProvider
     {
-        return $this->controllerMockProvider;
+        return $this->controllerMockProvider ?? new ControllerMockProvider();
     }
 
     public function getParametersProcessorMockProvider(): ParametersProcessorMockProvider
@@ -36,11 +37,16 @@ class DecodeControllerParametersTest extends TestCase
         return $this->parametersProcessorMockProvider;
     }
 
-    public function testDecodeControllerParameters(): void
+    /**
+     * @dataProvider decodeControllerParametersDataProvider
+     *
+     * @param mixed $controller
+     */
+    public function testDecodeControllerParameters($controller): void
     {
         $decodeParametersProcessorFactory = $this->getDecodeParametersProcessorFactoryMock();
         $decodeControllerParameters = new DecodeControllerParameters($decodeParametersProcessorFactory);
-        $event = $this->getEventMock(
+        $event = $this->getEvent(
             [
                 [
                     'id' => 'encoded',
@@ -50,27 +56,44 @@ class DecodeControllerParametersTest extends TestCase
                     'id' => 10,
                     'name' => 'test',
                 ],
-            ]
+            ],
+            $controller
         );
         $decodeControllerParameters->decodeControllerParameters($event);
         $this->assertSame(10, $event->getRequest()->attributes->all()['id']);
     }
 
-    public function testDecodeControllerParametersWithParamConverter(): void
+    public function decodeControllerParametersDataProvider()
+    {
+        $controller = new ParamsAnnotatedController();
+        return [
+            ['controller' => $controller, 'demo'],
+        ];
+    }
+
+    /**
+     * @dataProvider decodeControllerParametersDataProvider
+     *
+     * @param $controller
+     */
+    public function testDecodeControllerParametersWithParamConverter($controller): void
     {
         $decodeParametersProcessorFactory = $this->getDecodeParametersProcessorFactoryMock();
         $decodeControllerParameters = new DecodeControllerParameters($decodeParametersProcessorFactory);
         $decodeControllerParameters->setParamConverterListener($this->getDoctrineParamConverterListenerMock());
-        $event = $this->getEventMock([
+        $event = $this->getEvent(
             [
-                'id' => 'encoded',
-                'name' => 'test',
+                [
+                    'id' => 'encoded',
+                    'name' => 'test',
+                ],
+                [
+                    'id' => 10,
+                    'name' => 'test',
+                ],
             ],
-            [
-                'id' => 10,
-                'name' => 'test',
-            ],
-        ]);
+            $controller
+        );
         $decodeControllerParameters->decodeControllerParameters($event);
         $this->assertSame(10, $event->getRequest()->attributes->all()['id']);
     }
@@ -102,20 +125,14 @@ class DecodeControllerParametersTest extends TestCase
     /**
      * @return ControllerEvent|MockObject
      */
-    protected function getEventMock(array $requestConsecutiveCalls): ControllerEvent
+    protected function getEvent(array $requestConsecutiveCalls, $controller): ControllerEvent
     {
-        $mock = $this->getMockBuilder(ControllerEvent::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getController', 'getRequest'])
-            ->getMock();
+        $kernel = $this->createMock(HttpKernelInterface::class);
+        $request = $this->getRequestMock($requestConsecutiveCalls);
 
-        $mock->method('getController')
-            ->willReturn([$this->getControllerMockProvider()->getTestControllerMock(), 'demo']);
+        $event = new ControllerEvent($kernel, $controller, $request, HttpKernelInterface::MAIN_REQUEST);
 
-        $mock->method('getRequest')
-            ->willReturn($this->getRequestMock($requestConsecutiveCalls));
-
-        return $mock;
+        return $event;
     }
 
     /**

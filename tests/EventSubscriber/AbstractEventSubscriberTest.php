@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 abstract class AbstractEventSubscriberTest extends TestCase
@@ -17,18 +18,15 @@ abstract class AbstractEventSubscriberTest extends TestCase
     }
 
     /**
-     * @return ControllerEvent|MockObject
+     * @return ControllerEvent
      */
-    protected function getEventMock(): ControllerEvent
+    protected function getEvent(): ControllerEvent
     {
-        $mock = $this->getMockBuilder(ControllerEvent::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getRequest'])
-            ->getMock();
+        $kernel = $this->createMock(HttpKernelInterface::class);
+        $request = $this->getRequestMock();
+        $event = new ControllerEvent($kernel, fn() => (null), $request, HttpKernelInterface::MAIN_REQUEST);
 
-        $mock->method('getRequest')->willReturn($this->getRequestMock());
-
-        return $mock;
+        return $event;
     }
 
     /**

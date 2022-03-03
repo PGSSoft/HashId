@@ -9,7 +9,7 @@ use Pgs\HashIdBundle\Controller\DemoController;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Reflection\ReflectionProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AnnotationProviderTest extends TestCase
 {
@@ -18,7 +18,7 @@ class AnnotationProviderTest extends TestCase
      */
     protected $controllerAnnotationProvider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->controllerAnnotationProvider = new AnnotationProvider(
             $this->getReaderMock(),
@@ -90,7 +90,7 @@ class AnnotationProviderTest extends TestCase
 
     protected function getControllerMock()
     {
-        $mock = $this->getMockBuilder(Controller::class)->setMethods(['demo'])->getMockForAbstractClass();
+        $mock = $this->getMockBuilder(AbstractController::class)->setMethods(['demo'])->getMockForAbstractClass();
 
         return $mock;
     }
