@@ -7,9 +7,11 @@ namespace Pgs\HashIdBundle\Decorator;
 use Pgs\HashIdBundle\ParametersProcessor\Factory\EncodeParametersProcessorFactory;
 use Pgs\HashIdBundle\Traits\DecoratorTrait;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
+
 
 class RouterDecorator implements RouterInterface, WarmableInterface
 {
@@ -38,23 +40,30 @@ class RouterDecorator implements RouterInterface, WarmableInterface
         return $this->getRouter()->generate($name, $parameters, $referenceType);
     }
 
-    private function getRoute(string $name, array $parameters): ?Route
+    private function getRoute(string $name, array $parameters): ?array
     {
-        $routeCollection = $this->getRouter()->getRouteCollection();
-        $route = $routeCollection->get($name);
+        $url = null;
 
-        if (null === $route) {
+        try {
+            $url = $this->getRouter()->generate($name, $parameters);
+        } catch (RouteNotFoundException $e) {
             $locale = $parameters['_locale'] ?? $this->getRouter()->getContext()->getParameter('_locale');
-            $route = $routeCollection->get(sprintf('%s.%s', $name, $locale));
+            $url = $this->getRouter()->generate(sprintf('%s.%s', $name, $locale));
         }
 
-        return $route;
+        try {
+            return $this->getRouter()->match($url);
+        } catch (\Exception $e) {
+            // Ignore method not allow, no route found, etc.
+        }
+
+        return null;
     }
 
-    private function processParameters(?Route $route, array &$parameters): void
+    private function processParameters(?array $route, array &$parameters): void
     {
         if (null !== $route) {
-            $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route);
+            $parametersProcessor = $this->parametersProcessorFactory->createRouteEncodeParametersProcessor($route['_controller']);
             if ($parametersProcessor->needToProcess()) {
                 $parameters = $parametersProcessor->process($parameters);
             }

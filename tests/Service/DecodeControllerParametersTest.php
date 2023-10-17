@@ -20,7 +20,7 @@ class DecodeControllerParametersTest extends TestCase
 
     protected $parametersProcessorMockProvider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->parametersProcessorMockProvider = new ParametersProcessorMockProvider();
     }
