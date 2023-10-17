@@ -9,7 +9,6 @@ use Pgs\HashIdBundle\AnnotationProvider\AnnotationProvider;
 use Pgs\HashIdBundle\Exception\InvalidControllerException;
 use Pgs\HashIdBundle\Exception\MissingClassOrMethodException;
 use Pgs\HashIdBundle\ParametersProcessor\ParametersProcessorInterface;
-use Symfony\Component\Routing\Route;
 
 class EncodeParametersProcessorFactory extends AbstractParametersProcessorFactory
 {
@@ -27,9 +26,8 @@ class EncodeParametersProcessorFactory extends AbstractParametersProcessorFactor
         $this->encodeParametersProcessor = $encodeParametersProcessor;
     }
 
-    public function createRouteEncodeParametersProcessor(Route $route)
+    public function createRouteEncodeParametersProcessor(string $controller)
     {
-        $controller = $route->getDefault('_controller');
         try {
             /** @var Hash $annotation */
             $annotation = $this->getAnnotationProvider()->getFromString($controller, Hash::class);
