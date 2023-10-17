@@ -18,7 +18,7 @@ class AnnotationProviderTest extends TestCase
      */
     protected $controllerAnnotationProvider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->controllerAnnotationProvider = new AnnotationProvider(
             $this->getReaderMock(),

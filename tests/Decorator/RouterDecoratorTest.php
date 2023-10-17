@@ -18,7 +18,7 @@ class RouterDecoratorTest extends WebTestCase
      */
     protected static $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this::$container = static::createClient()->getContainer();
         $this->router = self::$container->get('router');
